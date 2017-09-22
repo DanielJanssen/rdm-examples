@@ -11,20 +11,15 @@ public class Quantity extends IntegerAttribute {
 	}
 
 	@Override
-	protected Boolean isValid() {
-		if (getValue() < 0) {
+	protected Boolean isValid(Integer aValue) {
+		if (aValue < 0) {
 			return false;
 		}
 		return true;
 	}
 
-	// TODO rt57, 23.07.2017: was ist mit null als wert? machen solche VOs Sinn?
 	public static Quantity fromValue(Integer aQuantity) {
-		Quantity quantity = new Quantity(aQuantity);
-		if (quantity.isValid()) {
-			return quantity;
-		}
-		throw new IllegalArgumentException("Value " + aQuantity + " is not valid for Quantity ");
+		return new Quantity(aQuantity);
 	}
 
 }
