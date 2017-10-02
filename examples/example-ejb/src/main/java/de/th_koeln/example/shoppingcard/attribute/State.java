@@ -2,7 +2,7 @@ package de.th_koeln.example.shoppingcard.attribute;
 
 import de.th_koeln.rdm.attribute.StringAttribute;
 
-//vll noch enum rausmachen?
+//// TODO rt57, 02.10.2017:  vll noch enum rausmachen?
 public class State extends StringAttribute {
 
 	public static final String NOT_ORDERED = "Not Ordered";
