@@ -1,0 +1,45 @@
+package de.th_koeln.example.shoppingcart.calculator;
+
+import static org.junit.Assert.*;
+
+import java.math.BigDecimal;
+
+import org.junit.Test;
+
+import de.th_koeln.example.shoppingcart.calculator.DefaultShoppingCartItemCalculator;
+import de.th_koeln.example.shoppingcart.entity.Article;
+import de.th_koeln.example.shoppingcart.entity.ShoppingCartItem;
+import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
+import de.th_koeln.example.shoppingcart.vo.TotalPrice;
+
+public class DefaultShoppingCartItemCalculatorTest {
+
+	@Test
+	public void testCalculate_1() {
+		DefaultShoppingCartItemCalculator sut = new DefaultShoppingCartItemCalculator();
+		ShoppingCartItem item = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(1).forPricePerPiece(getDummyPrice()).build();
+
+		TotalPrice actual = sut.calculate(item);
+		TotalPrice expected = new TotalPrice.Builder().withAmount(new BigDecimal(5)).forCurrency("Euro").build();
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void testCalculate_5() {
+		DefaultShoppingCartItemCalculator sut = new DefaultShoppingCartItemCalculator();
+		ShoppingCartItem item = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(5).forPricePerPiece(getDummyPrice()).build();
+
+		TotalPrice actual = sut.calculate(item);
+		TotalPrice expected = new TotalPrice.Builder().withAmount(new BigDecimal(25)).forCurrency("Euro").build();
+		assertEquals(expected, actual);
+	}
+
+	private Article getDummyArticle() {
+		return new Article.Builder().withNumber(12345).withName("Name").withDescription("Description").build();
+	}
+
+	private PricePerPiece getDummyPrice() {
+		return new PricePerPiece.Builder().withAmount(new BigDecimal(5)).forCurrency("Euro").build();
+	}
+
+}
