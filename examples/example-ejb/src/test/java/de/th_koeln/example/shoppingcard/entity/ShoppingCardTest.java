@@ -89,6 +89,6 @@ public class ShoppingCardTest {
 	}
 
 	private PricePerPiece getDummyPrice() {
-		return new PricePerPiece.Builder().withPriceValue(new BigDecimal(5)).forCurrency("Euro").build();
+		return new PricePerPiece.Builder().withAmount(new BigDecimal(5)).forCurrency("Euro").build();
 	}
 }

@@ -12,9 +12,9 @@ public class ThreeForTwoShoppingCardItemCalculator implements ShoppingCardItemCa
 	public TotalPrice calculate(ShoppingCardItem aShoppingCardItem) {
 		Quantity quantity = aShoppingCardItem.getNumberOfPieces();
 		Quantity freeItems = Quantity.fromValue(quantity.getValue() / 3);
-		Amount amountPerPiece = aShoppingCardItem.getPricePerPiece().getAmount();
 		Quantity reducedQuantity = quantity.reduce(freeItems);
+		Amount amountPerPiece = aShoppingCardItem.getPricePerPiece().getAmount();
 		Currency currency = aShoppingCardItem.getPricePerPiece().getCurrency();
-		return new TotalPrice.Builder().withPriceValue(amountPerPiece.multiply(reducedQuantity)).forCurrency(currency).build();
+		return new TotalPrice.Builder().withAmount(amountPerPiece.multiply(reducedQuantity)).forCurrency(currency).build();
 	}
 }

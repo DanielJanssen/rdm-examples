@@ -13,6 +13,6 @@ public class DefaultShoppingCardItemCalculator implements ShoppingCardItemCalcul
 		Quantity quantity = aShoppingCardItem.getNumberOfPieces();
 		Amount amountPerPiece = aShoppingCardItem.getPricePerPiece().getAmount();
 		Currency currency = aShoppingCardItem.getPricePerPiece().getCurrency();
-		return new TotalPrice.Builder().withPriceValue(amountPerPiece.multiply(quantity)).forCurrency(currency).build();
+		return new TotalPrice.Builder().withAmount(amountPerPiece.multiply(quantity)).forCurrency(currency).build();
 	}
 }

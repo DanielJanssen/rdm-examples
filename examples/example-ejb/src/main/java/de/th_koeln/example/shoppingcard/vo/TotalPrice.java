@@ -73,11 +73,11 @@ public class TotalPrice {
 			return currency;
 		}
 
-		public Builder withPriceValue(BigDecimal aValue) {
-			return withPriceValue(Amount.fromValue(aValue));
+		public Builder withAmount(BigDecimal aValue) {
+			return withAmount(Amount.fromValue(aValue));
 		}
 
-		public Builder withPriceValue(Amount aValue) {
+		public Builder withAmount(Amount aValue) {
 			value = aValue;
 			return this;
 		}

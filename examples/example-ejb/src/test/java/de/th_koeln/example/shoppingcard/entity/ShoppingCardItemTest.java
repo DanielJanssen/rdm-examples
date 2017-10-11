@@ -49,7 +49,7 @@ public class ShoppingCardItemTest {
 		ShoppingCardItem sut = new ShoppingCardItem.Builder().withArticle(getDummyArticle()).withQuantity(5).forPricePerPiece(getDummyPrice())
 				.withCalculator(new DefaultShoppingCardItemCalculator()).build();
 		TotalPrice actual = sut.getTotalPrice();
-		TotalPrice expected = new TotalPrice.Builder().withPriceValue(new BigDecimal(25)).forCurrency("Euro").build();
+		TotalPrice expected = new TotalPrice.Builder().withAmount(new BigDecimal(25)).forCurrency("Euro").build();
 		assertEquals(expected, actual);
 	}
 
@@ -58,7 +58,7 @@ public class ShoppingCardItemTest {
 		ShoppingCardItem sut = new ShoppingCardItem.Builder().withArticle(getDummyArticle()).withQuantity(5).forPricePerPiece(getDummyPrice())
 				.withCalculator(new ThreeForTwoShoppingCardItemCalculator()).build();
 		TotalPrice actual = sut.getTotalPrice();
-		TotalPrice expected = new TotalPrice.Builder().withPriceValue(new BigDecimal(20)).forCurrency("Euro").build();
+		TotalPrice expected = new TotalPrice.Builder().withAmount(new BigDecimal(20)).forCurrency("Euro").build();
 		assertEquals(expected, actual);
 	}
 
@@ -85,6 +85,6 @@ public class ShoppingCardItemTest {
 	}
 
 	private PricePerPiece getDummyPrice() {
-		return new PricePerPiece.Builder().withPriceValue(new BigDecimal(5)).forCurrency("Euro").build();
+		return new PricePerPiece.Builder().withAmount(new BigDecimal(5)).forCurrency("Euro").build();
 	}
 }

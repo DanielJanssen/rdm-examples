@@ -13,6 +13,8 @@ public class Amount extends BigDecimalAttribute {
 		super(aValue);
 	}
 
+	// TODO rt57, 11.10.2017: isValid => nicht negativ ?
+
 	public static Amount fromValue(BigDecimal aValue) {
 		return new Amount(aValue);
 	}

@@ -19,7 +19,7 @@ public class ThreeForTwoShoppingCardItemCalculatorTest {
 		ShoppingCardItem item = new ShoppingCardItem.Builder().withArticle(getDummyArticle()).withQuantity(1).forPricePerPiece(getDummyPrice()).build();
 
 		TotalPrice actual = sut.calculate(item);
-		TotalPrice expected = new TotalPrice.Builder().withPriceValue(new BigDecimal(5)).forCurrency("Euro").build();
+		TotalPrice expected = new TotalPrice.Builder().withAmount(new BigDecimal(5)).forCurrency("Euro").build();
 		assertEquals(expected, actual);
 	}
 
@@ -29,7 +29,7 @@ public class ThreeForTwoShoppingCardItemCalculatorTest {
 		ShoppingCardItem item = new ShoppingCardItem.Builder().withArticle(getDummyArticle()).withQuantity(3).forPricePerPiece(getDummyPrice()).build();
 
 		TotalPrice actual = sut.calculate(item);
-		TotalPrice expected = new TotalPrice.Builder().withPriceValue(new BigDecimal(10)).forCurrency("Euro").build();
+		TotalPrice expected = new TotalPrice.Builder().withAmount(new BigDecimal(10)).forCurrency("Euro").build();
 		assertEquals(expected, actual);
 	}
 
@@ -39,17 +39,17 @@ public class ThreeForTwoShoppingCardItemCalculatorTest {
 		ShoppingCardItem item = new ShoppingCardItem.Builder().withArticle(getDummyArticle()).withQuantity(5).forPricePerPiece(getDummyPrice()).build();
 
 		TotalPrice actual = sut.calculate(item);
-		TotalPrice expected = new TotalPrice.Builder().withPriceValue(new BigDecimal(20)).forCurrency("Euro").build();
+		TotalPrice expected = new TotalPrice.Builder().withAmount(new BigDecimal(20)).forCurrency("Euro").build();
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testCalculate_6() {
 		ThreeForTwoShoppingCardItemCalculator sut = new ThreeForTwoShoppingCardItemCalculator();
-		ShoppingCardItem item = new ShoppingCardItem.Builder().withArticle(getDummyArticle()).withQuantity(5).forPricePerPiece(getDummyPrice()).build();
+		ShoppingCardItem item = new ShoppingCardItem.Builder().withArticle(getDummyArticle()).withQuantity(6).forPricePerPiece(getDummyPrice()).build();
 
 		TotalPrice actual = sut.calculate(item);
-		TotalPrice expected = new TotalPrice.Builder().withPriceValue(new BigDecimal(20)).forCurrency("Euro").build();
+		TotalPrice expected = new TotalPrice.Builder().withAmount(new BigDecimal(20)).forCurrency("Euro").build();
 		assertEquals(expected, actual);
 	}
 
@@ -58,6 +58,6 @@ public class ThreeForTwoShoppingCardItemCalculatorTest {
 	}
 
 	private PricePerPiece getDummyPrice() {
-		return new PricePerPiece.Builder().withPriceValue(new BigDecimal(5)).forCurrency("Euro").build();
+		return new PricePerPiece.Builder().withAmount(new BigDecimal(5)).forCurrency("Euro").build();
 	}
 }
