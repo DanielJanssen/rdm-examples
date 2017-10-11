@@ -62,6 +62,24 @@ public class ShoppingCardItemTest {
 		assertEquals(expected, actual);
 	}
 
+	@Test
+	public void testReduceNumberOfPieces() {
+		ShoppingCardItem sut = new ShoppingCardItem.Builder().withArticle(getDummyArticle()).withQuantity(5).forPricePerPiece(getDummyPrice()).build();
+		sut.reduceNumberOfPieces(Quantity.fromValue(2));
+		Quantity expected = Quantity.fromValue(3);
+		Quantity actual = sut.getNumberOfPieces();
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void testAddNumberOfPieces() {
+		ShoppingCardItem sut = new ShoppingCardItem.Builder().withArticle(getDummyArticle()).withQuantity(5).forPricePerPiece(getDummyPrice()).build();
+		sut.addNumberOfPieces(Quantity.fromValue(2));
+		Quantity expected = Quantity.fromValue(7);
+		Quantity actual = sut.getNumberOfPieces();
+		assertEquals(expected, actual);
+	}
+
 	private Article getDummyArticle() {
 		return new Article.Builder().withNumber(12345).withName("Name").withDescription("Description").build();
 	}
@@ -69,6 +87,4 @@ public class ShoppingCardItemTest {
 	private PricePerPiece getDummyPrice() {
 		return new PricePerPiece.Builder().withPriceValue(new BigDecimal(5)).forCurrency("Euro").build();
 	}
-
-	// TODO rt57, 11.10.2017: teste calculator => bzw verschiedene setzen
 }

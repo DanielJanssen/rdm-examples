@@ -26,4 +26,8 @@ public class Quantity extends IntegerAttribute {
 		return Quantity.fromValue(getValue() - aQuantity.getValue());
 	}
 
+	public Quantity add(Quantity aQuantity) {
+		return Quantity.fromValue(getValue() + aQuantity.getValue());
+	}
+
 }

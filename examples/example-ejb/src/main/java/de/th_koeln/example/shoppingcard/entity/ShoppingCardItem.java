@@ -25,11 +25,11 @@ public class ShoppingCardItem {
 	}
 
 	public void addNumberOfPieces(Quantity aNumberOfPieces) {
-		// TODO rt57, 11.10.2017:
+		numberOfPieces = numberOfPieces.add(aNumberOfPieces);
 	}
 
 	public void reduceNumberOfPieces(Quantity aNumberOfPieces) {
-		// TODO rt57, 11.10.2017:
+		numberOfPieces = numberOfPieces.reduce(aNumberOfPieces);
 	}
 
 	public TotalPrice getTotalPrice() {
