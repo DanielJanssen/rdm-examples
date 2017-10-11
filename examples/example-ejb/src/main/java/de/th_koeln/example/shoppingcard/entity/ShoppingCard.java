@@ -5,7 +5,7 @@ import java.util.List;
 
 import de.th_koeln.example.shoppingcard.attribute.ShoppingCardId;
 import de.th_koeln.example.shoppingcard.attribute.State;
-import de.th_koeln.example.shoppingcard.vo.Price;
+import de.th_koeln.example.shoppingcard.vo.PricePerPiece;
 
 public class ShoppingCard {
 
@@ -75,7 +75,7 @@ public class ShoppingCard {
 		return state;
 	}
 
-	public Price getTotalPrice() {
+	public PricePerPiece getTotalPrice() {
 		return null;
 	}
 

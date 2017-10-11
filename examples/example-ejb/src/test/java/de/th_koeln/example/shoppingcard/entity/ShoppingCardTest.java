@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import org.junit.Test;
 
 import de.th_koeln.example.shoppingcard.attribute.State;
-import de.th_koeln.example.shoppingcard.vo.Price;
+import de.th_koeln.example.shoppingcard.vo.PricePerPiece;
 
 public class ShoppingCardTest {
 
@@ -81,14 +81,14 @@ public class ShoppingCardTest {
 	}
 
 	private ShoppingCardItem getDummyShoppingCardItem() {
-		return new ShoppingCardItem.Builder().withQuantity(1).withArticle(getDummyArticle()).forPrice(getDummyPrice()).build();
+		return new ShoppingCardItem.Builder().withQuantity(1).withArticle(getDummyArticle()).forPricePerPiece(getDummyPrice()).build();
 	}
 
 	private Article getDummyArticle() {
 		return new Article.Builder().withNumber(12345).withName("Name").withDescription("Description").build();
 	}
 
-	private Price getDummyPrice() {
-		return new Price.Builder().withPriceValue(new BigDecimal(5)).forCurrency("Euro").build();
+	private PricePerPiece getDummyPrice() {
+		return new PricePerPiece.Builder().withPriceValue(new BigDecimal(5)).forCurrency("Euro").build();
 	}
 }

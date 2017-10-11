@@ -22,4 +22,8 @@ public class Quantity extends IntegerAttribute {
 		return new Quantity(aQuantity);
 	}
 
+	public Quantity reduce(Quantity aQuantity) {
+		return Quantity.fromValue(getValue() - aQuantity.getValue());
+	}
+
 }

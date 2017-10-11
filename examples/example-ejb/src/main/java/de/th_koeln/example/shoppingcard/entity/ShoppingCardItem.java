@@ -2,41 +2,50 @@ package de.th_koeln.example.shoppingcard.entity;
 
 import de.th_koeln.example.shoppingcard.attribute.Quantity;
 import de.th_koeln.example.shoppingcard.attribute.ShoppingCardItemId;
-import de.th_koeln.example.shoppingcard.vo.Price;
+import de.th_koeln.example.shoppingcard.calculator.DefaultShoppingCardItemCalculator;
+import de.th_koeln.example.shoppingcard.calculator.ShoppingCardItemCalculator;
+import de.th_koeln.example.shoppingcard.vo.PricePerPiece;
+import de.th_koeln.example.shoppingcard.vo.TotalPrice;
 
 public class ShoppingCardItem {
 
 	private ShoppingCardItemId id;
-	private Price price;
-	private Quantity quantity;
+	private PricePerPiece pricePerPiece;
+	private Quantity numberOfPieces;
 	private Article article;
+	private ShoppingCardItemCalculator calculator;
 
 	private ShoppingCardItem(Builder aBuilder) {
 		super();
 		id = ShoppingCardItemId.fromValue();
-		price = aBuilder.getPrice();
-		quantity = aBuilder.getQuantity();
+		pricePerPiece = aBuilder.getPricePerPiece();
+		numberOfPieces = aBuilder.getQuantity();
 		article = aBuilder.getArticle();
+		calculator = aBuilder.getCalculator();
 	}
 
-	//erhöhe quantity
+	public void addNumberOfPieces(Quantity aNumberOfPieces) {
+		// TODO rt57, 11.10.2017:
+	}
 
-	//reduziere Quantity
+	public void reduceNumberOfPieces(Quantity aNumberOfPieces) {
+		// TODO rt57, 11.10.2017:
+	}
 
-	//get gesamtpreis
-
-	//Builder zum erzeugen, alles ist notwendig
+	public TotalPrice getTotalPrice() {
+		return calculator.calculate(this);
+	}
 
 	public ShoppingCardItemId getId() {
 		return id;
 	}
 
-	public Price getPrice() {
-		return price;
+	public PricePerPiece getPricePerPiece() {
+		return pricePerPiece;
 	}
 
-	public Quantity getQuantity() {
-		return quantity;
+	public Quantity getNumberOfPieces() {
+		return numberOfPieces;
 	}
 
 	public Article getArticle() {
@@ -74,11 +83,12 @@ public class ShoppingCardItem {
 	}
 
 	public static class Builder {
-		private Price price;
+		private PricePerPiece price;
 		private Quantity quantity;
 		private Article article;
+		private ShoppingCardItemCalculator calculator = new DefaultShoppingCardItemCalculator();
 
-		public Price getPrice() {
+		public PricePerPiece getPricePerPiece() {
 			return price;
 		}
 
@@ -90,7 +100,11 @@ public class ShoppingCardItem {
 			return article;
 		}
 
-		public Builder forPrice(Price aPrice) {
+		public ShoppingCardItemCalculator getCalculator() {
+			return calculator;
+		}
+
+		public Builder forPricePerPiece(PricePerPiece aPrice) {
 			price = aPrice;
 			return this;
 		}
@@ -106,6 +120,11 @@ public class ShoppingCardItem {
 
 		public Builder withArticle(Article anArticle) {
 			article = anArticle;
+			return this;
+		}
+
+		public Builder withCalculator(ShoppingCardItemCalculator aCalculator) {
+			calculator = aCalculator;
 			return this;
 		}
 
