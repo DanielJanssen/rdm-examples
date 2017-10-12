@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 
-import de.th_koeln.example.shoppingcart.attribute.State;
+import de.th_koeln.example.shoppingcart.enums.State;
 import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
 
 public class ShoppingCartTest {
@@ -62,7 +62,7 @@ public class ShoppingCartTest {
 		ShoppingCart actual = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(getDummyShoppingCartItem())
 				.addItem(getDummyShoppingCartItem()).build();
 		actual.order();
-		State expected = State.fromValue(State.ORDERED);
+		State expected = State.ORDERED;
 		assertEquals(expected, actual.getState());
 	}
 

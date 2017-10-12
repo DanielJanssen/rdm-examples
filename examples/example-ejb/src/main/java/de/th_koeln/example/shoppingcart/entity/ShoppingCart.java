@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.th_koeln.example.shoppingcart.attribute.ShoppingCartId;
-import de.th_koeln.example.shoppingcart.attribute.State;
+import de.th_koeln.example.shoppingcart.enums.State;
 import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
 
 public class ShoppingCart {
@@ -16,7 +16,7 @@ public class ShoppingCart {
 
 	private ShoppingCart(Builder aBuilder) {
 		id = ShoppingCartId.fromValue();
-		state = State.fromValue(State.NOT_ORDERED);
+		state = State.NOT_ORDERED;
 		userAccount = aBuilder.getUserAccount();
 		items = aBuilder.getItems();
 	}
@@ -24,7 +24,7 @@ public class ShoppingCart {
 	//add item => geht nur im bestimmten status
 	//gucken ob das Item schon drin ist, dann bei dem alten die quantity veärndern?
 	public void addItem(ShoppingCartItem anItem) {
-		if (state.getValue().equals(State.NOT_ORDERED)) {
+		if (!state.isOrdered()) {
 			if (items.contains(anItem)) {
 				//quantität hochzählen
 				//contains hier bestimmt nicht richtig, weil es nur auf die artikelnr ankommt
@@ -38,7 +38,7 @@ public class ShoppingCart {
 
 	//ggf nur die anzahl verringern? oder seperate methode (!)
 	public void removeItem(ShoppingCartItem anItem) {
-		if (state.getValue().equals(State.NOT_ORDERED)) {
+		if (!state.isOrdered()) {
 			if (items.contains(anItem)) {
 				//contains hier bestimmt nicht richtig, weil es nur auf die artikelnr ankommt
 				items.remove(anItem);
@@ -51,9 +51,9 @@ public class ShoppingCart {
 	}
 
 	public void order() {
-		if (state.getValue().equals(State.NOT_ORDERED)) {
+		if (!state.isOrdered()) {
 			if (!items.isEmpty()) {
-				state = State.fromValue(State.ORDERED);
+				state = State.ORDERED;
 			} else {
 				throw new IllegalStateException("ShoppingCart cannot be ordered, because it does not contain any ShoppingCartItems");
 			}
