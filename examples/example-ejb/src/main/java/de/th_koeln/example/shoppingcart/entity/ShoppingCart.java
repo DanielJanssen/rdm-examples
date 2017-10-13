@@ -3,6 +3,7 @@ package de.th_koeln.example.shoppingcart.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.th_koeln.example.shoppingcart.attribute.Quantity;
 import de.th_koeln.example.shoppingcart.attribute.ShoppingCartId;
 import de.th_koeln.example.shoppingcart.enums.State;
 import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
@@ -19,15 +20,15 @@ public class ShoppingCart {
 		state = State.NOT_ORDERED;
 		userAccount = aBuilder.getUserAccount();
 		items = aBuilder.getItems();
+		//gibt es einen fixierten total price? vermutlich schon!? => oder die Order/Bestellung hat den fixierten Preis
 	}
 
-	//add item => geht nur im bestimmten status
-	//gucken ob das Item schon drin ist, dann bei dem alten die quantity veärndern?
+	//was ist wenn sich der price geändert hat?
 	public void addItem(ShoppingCartItem anItem) {
 		if (!state.isOrdered()) {
-			if (items.contains(anItem)) {
-				//quantität hochzählen
-				//contains hier bestimmt nicht richtig, weil es nur auf die artikelnr ankommt
+			if (containsItem(anItem)) {
+				ShoppingCartItem existingItem = getItem(anItem);
+				existingItem.addNumberOfPieces(anItem.getNumberOfPieces());
 			} else {
 				items.add(anItem);
 			}
@@ -36,12 +37,11 @@ public class ShoppingCart {
 		}
 	}
 
-	//ggf nur die anzahl verringern? oder seperate methode (!)
 	public void removeItem(ShoppingCartItem anItem) {
 		if (!state.isOrdered()) {
-			if (items.contains(anItem)) {
-				//contains hier bestimmt nicht richtig, weil es nur auf die artikelnr ankommt
-				items.remove(anItem);
+			if (containsItem(anItem)) {
+				ShoppingCartItem removeItem = getItem(anItem);
+				items.remove(removeItem);
 			} else {
 				throw new IllegalArgumentException("Your ShoppingCart does not contain the requested Item " + anItem);
 			}
@@ -50,6 +50,24 @@ public class ShoppingCart {
 		}
 	}
 
+	public void reduceNumberOfPieces(ShoppingCartItem anItem, Quantity aReducableNumberOfPieces) {
+		if (!state.isOrdered()) {
+			if (containsItem(anItem)) {
+				ShoppingCartItem reducableItem = getItem(anItem);
+				if (aReducableNumberOfPieces.isGreaterThan(reducableItem.getNumberOfPieces()) || aReducableNumberOfPieces.equals(anItem.getNumberOfPieces())) {
+					removeItem(reducableItem);
+				} else {
+					reducableItem.reduceNumberOfPieces(aReducableNumberOfPieces);
+				}
+			} else {
+				throw new IllegalArgumentException("Your ShoppingCart does not contain the requested Item " + anItem);
+			}
+		} else {
+			throw new IllegalStateException("You cannot remove an Item if the ShoppingCart is still ordered");
+		}
+	}
+
+	//hier muss vermutlich der fixe preis erzeugt werden
 	public void order() {
 		if (!state.isOrdered()) {
 			if (!items.isEmpty()) {
@@ -62,6 +80,18 @@ public class ShoppingCart {
 		}
 	}
 
+	private Boolean containsItem(ShoppingCartItem anItem) {
+		return getItem(anItem) != null;
+	}
+
+	private ShoppingCartItem getItem(ShoppingCartItem anItem) {
+		for (ShoppingCartItem item : items) {
+			if (item.getArticle().getNumber().equals(anItem.getArticle().getNumber())) {
+				return item;
+			}
+		}
+		return null;
+	}
 	//berechne Gesamtpreis
 
 	// wirklich die get-methode, dann kann man darauf ja wieder verändern? oder wirklich nur die anwendungsfälle?
@@ -127,7 +157,12 @@ public class ShoppingCart {
 		}
 
 		public Builder addItem(ShoppingCartItem anItem) {
-			items.add(anItem);
+			if (containsItem(anItem)) {
+				ShoppingCartItem existingItem = getItem(anItem);
+				existingItem.addNumberOfPieces(anItem.getNumberOfPieces());
+			} else {
+				items.add(anItem);
+			}
 			return this;
 		}
 
@@ -140,6 +175,19 @@ public class ShoppingCart {
 
 		private boolean isValid() {
 			return userAccount == null;
+		}
+
+		private Boolean containsItem(ShoppingCartItem anItem) {
+			return getItem(anItem) != null;
+		}
+
+		private ShoppingCartItem getItem(ShoppingCartItem anItem) {
+			for (ShoppingCartItem item : items) {
+				if (item.getArticle().getNumber().equals(anItem.getArticle().getNumber())) {
+					return item;
+				}
+			}
+			return null;
 		}
 	}
 }

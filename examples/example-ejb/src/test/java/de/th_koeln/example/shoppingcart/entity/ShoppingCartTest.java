@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 
+import de.th_koeln.example.shoppingcart.attribute.ArticleNumber;
+import de.th_koeln.example.shoppingcart.attribute.Quantity;
 import de.th_koeln.example.shoppingcart.enums.State;
 import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
 
@@ -25,7 +27,7 @@ public class ShoppingCartTest {
 	@Test()
 	public void testShoppingCartBuilder_withItems() {
 		ShoppingCart actual = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(getDummyShoppingCartItem())
-				.addItem(getDummyShoppingCartItem()).build();
+				.addItem(getDummyShoppingCartItem2()).build();
 		int expected = 2;
 		assertNotNull(actual);
 		assertEquals(expected, actual.getItems().size());
@@ -33,28 +35,83 @@ public class ShoppingCartTest {
 
 	@Test
 	public void testRemoveItem() {
-		ShoppingCartItem firstItem = getDummyShoppingCartItem();
-		ShoppingCartItem secondItem = getDummyShoppingCartItem();
-		ShoppingCart actual = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(firstItem).addItem(secondItem).build();
-		actual.removeItem(firstItem);
-		int expected = 1;
-		assertEquals(expected, actual.getItems().size());
-		assertTrue(actual.getItems().contains(secondItem));
+		ShoppingCart actual = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(getDummyShoppingCartItem())
+				.addItem(getDummyShoppingCartItem2()).build();
+		actual.removeItem(getDummyShoppingCartItem());
+		int expectedItemSize = 1;
+		ArticleNumber expectedArticleNumber = ArticleNumber.fromValue(12346);
+		assertEquals(expectedItemSize, actual.getItems().size());
+		assertEquals(expectedArticleNumber, actual.getItems().get(0).getArticle().getNumber());
 	}
 
 	@Test(expected = IllegalStateException.class)
 	public void testRemoveItem_stillOrdered() {
-		ShoppingCart actual = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(getDummyShoppingCartItem())
-				.addItem(getDummyShoppingCartItem()).build();
-		actual.order();
-		actual.removeItem(getDummyShoppingCartItem());
+		ShoppingCart sut = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(getDummyShoppingCartItem()).addItem(getDummyShoppingCartItem())
+				.build();
+		sut.order();
+		sut.removeItem(getDummyShoppingCartItem());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testRemoveItem_notInShoppingCart() {
-		ShoppingCartItem item = getDummyShoppingCartItem();
-		ShoppingCart actual = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(getDummyShoppingCartItem()).build();
-		actual.removeItem(item);
+		ShoppingCart sut = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(getDummyShoppingCartItem()).build();
+		sut.removeItem(getDummyShoppingCartItem2());
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void testAddItem_stillOrdered() {
+		ShoppingCart sut = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(getDummyShoppingCartItem()).addItem(getDummyShoppingCartItem())
+				.build();
+		sut.order();
+		sut.addItem(getDummyShoppingCartItem());
+	}
+
+	@Test
+	public void testAddItem_unknownItem() {
+		ShoppingCart sut = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(getDummyShoppingCartItem()).build();
+		sut.addItem(getDummyShoppingCartItem2());
+		int expected = 2;
+		assertEquals(expected, sut.getItems().size());
+	}
+
+	@Test
+	public void testAddItem_knownItem() {
+		ShoppingCart sut = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(getDummyShoppingCartItem()).build();
+		sut.addItem(getDummyShoppingCartItem());
+		int expected = 1;
+		assertEquals(expected, sut.getItems().size());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void reduceNumberOfPieces_unknownItem() {
+		ShoppingCart sut = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(getDummyShoppingCartItem()).build();
+		sut.reduceNumberOfPieces(getDummyShoppingCartItem2(), Quantity.fromValue(2));
+	}
+
+	@Test
+	public void reduceNumberOfPieces_quantityBelower0() {
+		ShoppingCart sut = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(getDummyShoppingCartItem()).build();
+		sut.reduceNumberOfPieces(getDummyShoppingCartItem(), Quantity.fromValue(10));
+		int expected = 0;
+		assertEquals(expected, sut.getItems().size());
+	}
+
+	@Test
+	public void reduceNumberOfPieces_quantityIs0() {
+		ShoppingCart sut = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(getDummyShoppingCartItem()).build();
+		sut.reduceNumberOfPieces(getDummyShoppingCartItem(), Quantity.fromValue(1));
+		int expected = 0;
+		assertEquals(expected, sut.getItems().size());
+	}
+
+	@Test
+	public void reduceNumberOfPieces_quantityIsGreater0() {
+		ShoppingCart sut = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(getDummyShoppingCartItem2()).build();
+		sut.reduceNumberOfPieces(getDummyShoppingCartItem2(), Quantity.fromValue(1));
+		int expected = 1;
+		Quantity expectedNumberOfPieces = Quantity.fromValue(9);
+		assertEquals(expected, sut.getItems().size());
+		assertEquals(expectedNumberOfPieces, sut.getItems().get(0).getNumberOfPieces());
 	}
 
 	@Test
@@ -84,8 +141,16 @@ public class ShoppingCartTest {
 		return new ShoppingCartItem.Builder().withQuantity(1).withArticle(getDummyArticle()).forPricePerPiece(getDummyPrice()).build();
 	}
 
+	private ShoppingCartItem getDummyShoppingCartItem2() {
+		return new ShoppingCartItem.Builder().withQuantity(10).withArticle(getDummyArticle2()).forPricePerPiece(getDummyPrice()).build();
+	}
+
 	private Article getDummyArticle() {
 		return new Article.Builder().withNumber(12345).withName("Name").withDescription("Description").build();
+	}
+
+	private Article getDummyArticle2() {
+		return new Article.Builder().withNumber(12346).withName("Name").withDescription("Description").build();
 	}
 
 	private PricePerPiece getDummyPrice() {
