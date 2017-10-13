@@ -105,8 +105,7 @@ public class ShoppingCart {
 		if (isOrdered()) {
 			return order.getTotalPrice();
 		}
-		return null;
-		// TODO rt57, 13.10.2017:
+		return calculator.calculate(this);
 	}
 
 	private Boolean isOrdered() {
