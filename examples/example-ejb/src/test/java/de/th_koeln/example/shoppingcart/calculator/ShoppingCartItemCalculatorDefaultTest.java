@@ -6,17 +6,17 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 
-import de.th_koeln.example.shoppingcart.calculator.DefaultShoppingCartItemCalculator;
+import de.th_koeln.example.shoppingcart.calculator.ShoppingCartItemCalculatorDefault;
 import de.th_koeln.example.shoppingcart.entity.Article;
 import de.th_koeln.example.shoppingcart.entity.ShoppingCartItem;
 import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
 import de.th_koeln.example.shoppingcart.vo.TotalPrice;
 
-public class DefaultShoppingCartItemCalculatorTest {
+public class ShoppingCartItemCalculatorDefaultTest {
 
 	@Test
 	public void testCalculate_1() {
-		DefaultShoppingCartItemCalculator sut = new DefaultShoppingCartItemCalculator();
+		ShoppingCartItemCalculatorDefault sut = new ShoppingCartItemCalculatorDefault();
 		ShoppingCartItem item = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(1).forPricePerPiece(getDummyPrice()).build();
 
 		TotalPrice actual = sut.calculate(item);
@@ -26,7 +26,7 @@ public class DefaultShoppingCartItemCalculatorTest {
 
 	@Test
 	public void testCalculate_5() {
-		DefaultShoppingCartItemCalculator sut = new DefaultShoppingCartItemCalculator();
+		ShoppingCartItemCalculatorDefault sut = new ShoppingCartItemCalculatorDefault();
 		ShoppingCartItem item = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(5).forPricePerPiece(getDummyPrice()).build();
 
 		TotalPrice actual = sut.calculate(item);

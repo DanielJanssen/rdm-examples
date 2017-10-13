@@ -82,14 +82,22 @@ public class ShoppingCartTest {
 		assertEquals(expected, sut.getItems().size());
 	}
 
+	@Test(expected = IllegalStateException.class)
+	public void testReduceNumberOfPieces_stillOrdered() {
+		ShoppingCart sut = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(getDummyShoppingCartItem()).addItem(getDummyShoppingCartItem())
+				.build();
+		sut.order();
+		sut.reduceNumberOfPieces(getDummyShoppingCartItem(), Quantity.fromValue(1));
+	}
+
 	@Test(expected = IllegalArgumentException.class)
-	public void reduceNumberOfPieces_unknownItem() {
+	public void testReduceNumberOfPieces_unknownItem() {
 		ShoppingCart sut = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(getDummyShoppingCartItem()).build();
 		sut.reduceNumberOfPieces(getDummyShoppingCartItem2(), Quantity.fromValue(2));
 	}
 
 	@Test
-	public void reduceNumberOfPieces_quantityBelower0() {
+	public void testReduceNumberOfPieces_quantityBelower0() {
 		ShoppingCart sut = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(getDummyShoppingCartItem()).build();
 		sut.reduceNumberOfPieces(getDummyShoppingCartItem(), Quantity.fromValue(10));
 		int expected = 0;
@@ -97,7 +105,7 @@ public class ShoppingCartTest {
 	}
 
 	@Test
-	public void reduceNumberOfPieces_quantityIs0() {
+	public void testReduceNumberOfPieces_quantityIs0() {
 		ShoppingCart sut = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(getDummyShoppingCartItem()).build();
 		sut.reduceNumberOfPieces(getDummyShoppingCartItem(), Quantity.fromValue(1));
 		int expected = 0;
@@ -105,7 +113,7 @@ public class ShoppingCartTest {
 	}
 
 	@Test
-	public void reduceNumberOfPieces_quantityIsGreater0() {
+	public void testReduceNumberOfPieces_quantityIsGreater0() {
 		ShoppingCart sut = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(getDummyShoppingCartItem2()).build();
 		sut.reduceNumberOfPieces(getDummyShoppingCartItem2(), Quantity.fromValue(1));
 		int expected = 1;

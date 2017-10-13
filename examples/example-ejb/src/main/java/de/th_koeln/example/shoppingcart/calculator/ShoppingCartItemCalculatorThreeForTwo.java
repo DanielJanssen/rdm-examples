@@ -6,7 +6,7 @@ import de.th_koeln.example.shoppingcart.attribute.Quantity;
 import de.th_koeln.example.shoppingcart.entity.ShoppingCartItem;
 import de.th_koeln.example.shoppingcart.vo.TotalPrice;
 
-public class ThreeForTwoShoppingCartItemCalculator implements ShoppingCartItemCalculator {
+public class ShoppingCartItemCalculatorThreeForTwo implements ShoppingCartItemCalculator {
 
 	@Override
 	public TotalPrice calculate(ShoppingCartItem aShoppingCartItem) {

@@ -6,17 +6,17 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 
-import de.th_koeln.example.shoppingcart.calculator.ThreeForTwoShoppingCartItemCalculator;
+import de.th_koeln.example.shoppingcart.calculator.ShoppingCartItemCalculatorThreeForTwo;
 import de.th_koeln.example.shoppingcart.entity.Article;
 import de.th_koeln.example.shoppingcart.entity.ShoppingCartItem;
 import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
 import de.th_koeln.example.shoppingcart.vo.TotalPrice;
 
-public class ThreeForTwoShoppingCartItemCalculatorTest {
+public class ShoppingCartItemCalculatorThreeForTwoTest {
 
 	@Test
 	public void testCalculate_1() {
-		ThreeForTwoShoppingCartItemCalculator sut = new ThreeForTwoShoppingCartItemCalculator();
+		ShoppingCartItemCalculatorThreeForTwo sut = new ShoppingCartItemCalculatorThreeForTwo();
 		ShoppingCartItem item = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(1).forPricePerPiece(getDummyPrice()).build();
 
 		TotalPrice actual = sut.calculate(item);
@@ -26,7 +26,7 @@ public class ThreeForTwoShoppingCartItemCalculatorTest {
 
 	@Test
 	public void testCalculate_3() {
-		ThreeForTwoShoppingCartItemCalculator sut = new ThreeForTwoShoppingCartItemCalculator();
+		ShoppingCartItemCalculatorThreeForTwo sut = new ShoppingCartItemCalculatorThreeForTwo();
 		ShoppingCartItem item = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(3).forPricePerPiece(getDummyPrice()).build();
 
 		TotalPrice actual = sut.calculate(item);
@@ -36,7 +36,7 @@ public class ThreeForTwoShoppingCartItemCalculatorTest {
 
 	@Test
 	public void testCalculate_5() {
-		ThreeForTwoShoppingCartItemCalculator sut = new ThreeForTwoShoppingCartItemCalculator();
+		ShoppingCartItemCalculatorThreeForTwo sut = new ShoppingCartItemCalculatorThreeForTwo();
 		ShoppingCartItem item = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(5).forPricePerPiece(getDummyPrice()).build();
 
 		TotalPrice actual = sut.calculate(item);
@@ -46,7 +46,7 @@ public class ThreeForTwoShoppingCartItemCalculatorTest {
 
 	@Test
 	public void testCalculate_6() {
-		ThreeForTwoShoppingCartItemCalculator sut = new ThreeForTwoShoppingCartItemCalculator();
+		ShoppingCartItemCalculatorThreeForTwo sut = new ShoppingCartItemCalculatorThreeForTwo();
 		ShoppingCartItem item = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(6).forPricePerPiece(getDummyPrice()).build();
 
 		TotalPrice actual = sut.calculate(item);

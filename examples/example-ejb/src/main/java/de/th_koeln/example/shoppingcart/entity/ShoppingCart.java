@@ -5,8 +5,10 @@ import java.util.List;
 
 import de.th_koeln.example.shoppingcart.attribute.Quantity;
 import de.th_koeln.example.shoppingcart.attribute.ShoppingCartId;
+import de.th_koeln.example.shoppingcart.calculator.ShoppingCartCalculator;
 import de.th_koeln.example.shoppingcart.enums.State;
 import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
+import de.th_koeln.example.shoppingcart.vo.TotalPrice;
 
 public class ShoppingCart {
 
@@ -14,6 +16,11 @@ public class ShoppingCart {
 	private UserAccount userAccount;
 	private State state;
 	private List<ShoppingCartItem> items;
+	private Order order;
+	private ShoppingCartCalculator calculator;
+
+	//	hat dann den fixen preis, ersetzt/erweitert den state =>
+	//	kann nicht über den Builder gesetzt werden? Was ist wenn es aus der DB geladen wird?
 
 	private ShoppingCart(Builder aBuilder) {
 		id = ShoppingCartId.fromValue();
@@ -23,9 +30,10 @@ public class ShoppingCart {
 		//gibt es einen fixierten total price? vermutlich schon!? => oder die Order/Bestellung hat den fixierten Preis
 	}
 
-	//was ist wenn sich der price geändert hat?
+	//was ist wenn sich der price des Artikels geändert hat?
+	// TODO rt57, 13.10.2017: gleiche currency?
 	public void addItem(ShoppingCartItem anItem) {
-		if (!state.isOrdered()) {
+		if (!isOrdered()) {
 			if (containsItem(anItem)) {
 				ShoppingCartItem existingItem = getItem(anItem);
 				existingItem.addNumberOfPieces(anItem.getNumberOfPieces());
@@ -38,7 +46,7 @@ public class ShoppingCart {
 	}
 
 	public void removeItem(ShoppingCartItem anItem) {
-		if (!state.isOrdered()) {
+		if (!isOrdered()) {
 			if (containsItem(anItem)) {
 				ShoppingCartItem removeItem = getItem(anItem);
 				items.remove(removeItem);
@@ -51,7 +59,7 @@ public class ShoppingCart {
 	}
 
 	public void reduceNumberOfPieces(ShoppingCartItem anItem, Quantity aReducableNumberOfPieces) {
-		if (!state.isOrdered()) {
+		if (!isOrdered()) {
 			if (containsItem(anItem)) {
 				ShoppingCartItem reducableItem = getItem(anItem);
 				if (aReducableNumberOfPieces.isGreaterThan(reducableItem.getNumberOfPieces()) || aReducableNumberOfPieces.equals(anItem.getNumberOfPieces())) {
@@ -67,9 +75,9 @@ public class ShoppingCart {
 		}
 	}
 
-	//hier muss vermutlich der fixe preis erzeugt werden
+	//hier muss vermutlich der fixe preis erzeugt werden => eher die Order mit dem fixen preis :-)
 	public void order() {
-		if (!state.isOrdered()) {
+		if (!isOrdered()) {
 			if (!items.isEmpty()) {
 				state = State.ORDERED;
 			} else {
@@ -92,12 +100,23 @@ public class ShoppingCart {
 		}
 		return null;
 	}
-	//berechne Gesamtpreis
+
+	public TotalPrice getTotal() {
+		if (isOrdered()) {
+			return order.getTotalPrice();
+		}
+		return null;
+		// TODO rt57, 13.10.2017:
+	}
+
+	private Boolean isOrdered() {
+		return state.isOrdered();
+	}
 
 	// wirklich die get-methode, dann kann man darauf ja wieder verändern? oder wirklich nur die anwendungsfälle?
 	// oder eine neue liste zurückgeben
 	//protected ist ganz gut für die tests... gucken, was wir später auf der GUI damit machen
-	protected List<ShoppingCartItem> getItems() {
+	public List<ShoppingCartItem> getItems() {
 		return items;
 	}
 

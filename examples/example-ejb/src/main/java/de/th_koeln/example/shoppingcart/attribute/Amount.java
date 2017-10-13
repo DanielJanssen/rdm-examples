@@ -22,4 +22,8 @@ public class Amount extends BigDecimalAttribute {
 	public Amount multiply(IntegerAttribute anAttribut) {
 		return fromValue(getValue().multiply(BigDecimal.valueOf(anAttribut.getValue())));
 	}
+
+	public Amount add(BigDecimalAttribute anAttribut) {
+		return fromValue(getValue().add(anAttribut.getValue()));
+	}
 }

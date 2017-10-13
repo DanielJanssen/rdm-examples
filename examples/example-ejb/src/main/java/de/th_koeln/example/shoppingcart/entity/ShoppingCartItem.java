@@ -2,7 +2,7 @@ package de.th_koeln.example.shoppingcart.entity;
 
 import de.th_koeln.example.shoppingcart.attribute.Quantity;
 import de.th_koeln.example.shoppingcart.attribute.ShoppingCartItemId;
-import de.th_koeln.example.shoppingcart.calculator.DefaultShoppingCartItemCalculator;
+import de.th_koeln.example.shoppingcart.calculator.ShoppingCartItemCalculatorDefault;
 import de.th_koeln.example.shoppingcart.calculator.ShoppingCartItemCalculator;
 import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
 import de.th_koeln.example.shoppingcart.vo.TotalPrice;
@@ -86,7 +86,7 @@ public class ShoppingCartItem {
 		private PricePerPiece price;
 		private Quantity quantity;
 		private Article article;
-		private ShoppingCartItemCalculator calculator = new DefaultShoppingCartItemCalculator();
+		private ShoppingCartItemCalculator calculator = new ShoppingCartItemCalculatorDefault();
 
 		public PricePerPiece getPricePerPiece() {
 			return price;
