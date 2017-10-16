@@ -20,8 +20,7 @@ public class ShoppingCart {
 	private Order order;
 	private ShoppingCartCalculator calculator;
 
-	//	hat dann den fixen preis, ersetzt/erweitert den state =>
-	//	kann nicht über den Builder gesetzt werden? Was ist wenn es aus der DB geladen wird?
+	//TODO	kann nicht über den Builder gesetzt werden? Was ist wenn es aus der DB geladen wird?
 
 	private ShoppingCart(Builder aBuilder) {
 		id = ShoppingCartId.fromValue();
@@ -29,7 +28,6 @@ public class ShoppingCart {
 		userAccount = aBuilder.getUserAccount();
 		items = aBuilder.getItems();
 		calculator = aBuilder.getCalculator();
-		//gibt es einen fixierten total price? vermutlich schon!? => oder die Order/Bestellung hat den fixierten Preis
 	}
 
 	//was ist wenn sich der price des Artikels geändert hat?
@@ -77,7 +75,7 @@ public class ShoppingCart {
 		}
 	}
 
-	//hier muss vermutlich der fixe preis erzeugt werden => eher die Order mit dem fixen preis :-)
+	//TODO hier muss vermutlich der fixe preis erzeugt werden => eher die Order mit dem fixen preis :-)
 	public void order() {
 		if (!isOrdered()) {
 			if (!items.isEmpty()) {
@@ -114,7 +112,7 @@ public class ShoppingCart {
 		return state.isOrdered();
 	}
 
-	// wirklich die get-methode, dann kann man darauf ja wieder verändern? oder wirklich nur die anwendungsfälle?
+	// TODO wirklich die get-methode, dann kann man darauf ja wieder verändern? oder wirklich nur die anwendungsfälle?
 	// oder eine neue liste zurückgeben
 	//protected ist ganz gut für die tests... gucken, was wir später auf der GUI damit machen
 	public List<ShoppingCartItem> getItems() {
