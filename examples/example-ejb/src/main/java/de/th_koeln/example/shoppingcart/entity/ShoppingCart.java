@@ -6,6 +6,7 @@ import java.util.List;
 import de.th_koeln.example.shoppingcart.attribute.Quantity;
 import de.th_koeln.example.shoppingcart.attribute.ShoppingCartId;
 import de.th_koeln.example.shoppingcart.calculator.ShoppingCartCalculator;
+import de.th_koeln.example.shoppingcart.calculator.ShoppingCartCalculatorDefault;
 import de.th_koeln.example.shoppingcart.enums.State;
 import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
 import de.th_koeln.example.shoppingcart.vo.TotalPrice;
@@ -27,6 +28,7 @@ public class ShoppingCart {
 		state = State.NOT_ORDERED;
 		userAccount = aBuilder.getUserAccount();
 		items = aBuilder.getItems();
+		calculator = aBuilder.getCalculator();
 		//gibt es einen fixierten total price? vermutlich schon!? => oder die Order/Bestellung hat den fixierten Preis
 	}
 
@@ -160,6 +162,7 @@ public class ShoppingCart {
 	public static class Builder {
 		private UserAccount userAccount;
 		private List<ShoppingCartItem> items = new ArrayList<>();
+		private ShoppingCartCalculator calculator = new ShoppingCartCalculatorDefault();
 
 		public List<ShoppingCartItem> getItems() {
 			return items;
@@ -167,6 +170,10 @@ public class ShoppingCart {
 
 		public UserAccount getUserAccount() {
 			return userAccount;
+		}
+
+		public ShoppingCartCalculator getCalculator() {
+			return calculator;
 		}
 
 		public Builder withUserAccount(UserAccount anUserAccount) {
@@ -184,15 +191,20 @@ public class ShoppingCart {
 			return this;
 		}
 
+		public Builder withCalculator(ShoppingCartCalculator aCalculator) {
+			calculator = aCalculator;
+			return this;
+		}
+
 		public ShoppingCart build() {
-			if (isValid()) {
+			if (!isValid()) {
 				throw new IllegalArgumentException("UserAccount has to be set for building a ShoppingCart");
 			}
 			return new ShoppingCart(this);
 		}
 
 		private boolean isValid() {
-			return userAccount == null;
+			return userAccount != null;
 		}
 
 		private Boolean containsItem(ShoppingCartItem anItem) {

@@ -10,7 +10,15 @@ public class Order {
 	private OrderId id;
 	private ShoppingCart shoppingCart;
 	private TotalPrice totalPrice;
+	// TODO rt57, 16.10.2017:  rdm
 	private Date orderDate;
+
+	private Order(Builder aBuilder) {
+		id = OrderId.fromValue();
+		orderDate = new Date();
+		shoppingCart = aBuilder.getShoppingCart();
+		totalPrice = shoppingCart.getTotal();
+	}
 
 	public OrderId getId() {
 		return id;
@@ -56,6 +64,30 @@ public class Order {
 			return false;
 		}
 		return true;
+	}
+
+	public static class Builder {
+		private ShoppingCart shoppingCart;
+
+		public Builder forShoppingCart(ShoppingCart aShoppingCart) {
+			shoppingCart = aShoppingCart;
+			return this;
+		}
+
+		public ShoppingCart getShoppingCart() {
+			return shoppingCart;
+		}
+
+		public Order build() {
+			if (!isValid()) {
+				throw new IllegalArgumentException("ShoppingCart has to be set for building an Order");
+			}
+			return new Order(this);
+		}
+
+		private boolean isValid() {
+			return shoppingCart != null && !shoppingCart.getItems().isEmpty();
+		}
 	}
 
 }
