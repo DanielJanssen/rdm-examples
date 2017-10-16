@@ -2,6 +2,7 @@ package de.th_koeln.example.shoppingcart.entity;
 
 import java.util.Date;
 
+import de.th_koeln.example.shoppingcart.attribute.OrderDate;
 import de.th_koeln.example.shoppingcart.attribute.OrderId;
 import de.th_koeln.example.shoppingcart.vo.TotalPrice;
 
@@ -10,12 +11,11 @@ public class Order {
 	private OrderId id;
 	private ShoppingCart shoppingCart;
 	private TotalPrice totalPrice;
-	// TODO rt57, 16.10.2017:  rdm
-	private Date orderDate;
+	private OrderDate orderDate;
 
 	private Order(Builder aBuilder) {
 		id = OrderId.fromValue();
-		orderDate = new Date();
+		orderDate = OrderDate.fromValue(new Date());
 		shoppingCart = aBuilder.getShoppingCart();
 		totalPrice = shoppingCart.getTotal();
 	}
@@ -32,7 +32,7 @@ public class Order {
 		return totalPrice;
 	}
 
-	public Date getOrderDate() {
+	public OrderDate getOrderDate() {
 		return orderDate;
 	}
 
