@@ -7,7 +7,7 @@ import de.th_koeln.example.shoppingcart.attribute.Quantity;
 import de.th_koeln.example.shoppingcart.attribute.ShoppingCartId;
 import de.th_koeln.example.shoppingcart.calculator.ShoppingCartCalculator;
 import de.th_koeln.example.shoppingcart.calculator.ShoppingCartCalculatorDefault;
-import de.th_koeln.example.shoppingcart.enums.State;
+import de.th_koeln.example.shoppingcart.enums.OrderState;
 import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
 import de.th_koeln.example.shoppingcart.vo.TotalPrice;
 
@@ -15,14 +15,14 @@ public class ShoppingCart {
 
 	private ShoppingCartId id;
 	private UserAccount userAccount;
-	private State state;
+	private OrderState state;
 	private List<ShoppingCartItem> items;
 	private Order order;
 	private ShoppingCartCalculator calculator;
 
 	private ShoppingCart(Builder aBuilder) {
 		id = ShoppingCartId.fromValue();
-		state = State.NOT_ORDERED;
+		state = OrderState.NOT_ORDERED;
 		userAccount = aBuilder.getUserAccount();
 		items = aBuilder.getItems();
 		//TODO	kann nicht über den Builder gesetzt werden? Was ist wenn es aus der DB geladen wird?
@@ -74,11 +74,11 @@ public class ShoppingCart {
 		}
 	}
 
-	//TODO hier muss vermutlich der fixe preis erzeugt werden => eher die Order mit dem fixen preis :-)
 	public void order() {
 		if (!isOrdered()) {
 			if (!items.isEmpty()) {
-				state = State.ORDERED;
+				order = new Order.Builder().forShoppingCart(this).build();
+				state = OrderState.ORDERED;
 			} else {
 				throw new IllegalStateException("ShoppingCart cannot be ordered, because it does not contain any ShoppingCartItems");
 			}
@@ -118,7 +118,7 @@ public class ShoppingCart {
 		return items;
 	}
 
-	protected State getState() {
+	protected OrderState getState() {
 		return state;
 	}
 

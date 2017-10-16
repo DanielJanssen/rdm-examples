@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import de.th_koeln.example.shoppingcart.attribute.ArticleNumber;
 import de.th_koeln.example.shoppingcart.attribute.Quantity;
-import de.th_koeln.example.shoppingcart.enums.State;
+import de.th_koeln.example.shoppingcart.enums.OrderState;
 import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
 
 public class ShoppingCartTest {
@@ -127,7 +127,7 @@ public class ShoppingCartTest {
 		ShoppingCart actual = new ShoppingCart.Builder().withUserAccount(new UserAccount()).addItem(getDummyShoppingCartItem())
 				.addItem(getDummyShoppingCartItem()).build();
 		actual.order();
-		State expected = State.ORDERED;
+		OrderState expected = OrderState.ORDERED;
 		assertEquals(expected, actual.getState());
 	}
 

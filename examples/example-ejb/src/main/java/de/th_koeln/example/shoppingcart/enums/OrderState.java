@@ -1,22 +1,23 @@
 package de.th_koeln.example.shoppingcart.enums;
 
-public enum State {
+public enum OrderState {
 	// @formatter:off
 	NOT_ORDERED("Not Ordered"),
-	ORDERED("Ordered");
+	ORDERED("Ordered"),
+	CANCELLED("Cancelled");
 	// @formatter:on
 
 	private String label;
 
-	private State(String aLabel) {
+	private OrderState(String aLabel) {
 		label = aLabel;
 	}
 
-	public static State encode(String aCode) {
+	public static OrderState encode(String aCode) {
 		if (aCode == null) {
 			return null;
 		}
-		for (State tempOrderStatus : State.values()) {
+		for (OrderState tempOrderStatus : OrderState.values()) {
 			if (aCode.equals(tempOrderStatus.getLabel())) {
 				return tempOrderStatus;
 			}
@@ -24,7 +25,7 @@ public enum State {
 		throw new IllegalArgumentException("State not found. Illegal Code " + aCode);
 	}
 
-	public static String decode(State aOrderStatus) {
+	public static String decode(OrderState aOrderStatus) {
 		if (aOrderStatus == null) {
 			return null;
 		}
@@ -43,5 +44,4 @@ public enum State {
 	public Boolean isOrdered() {
 		return this == ORDERED;
 	}
-
 }
