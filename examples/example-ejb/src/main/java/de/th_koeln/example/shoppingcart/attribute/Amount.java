@@ -13,7 +13,10 @@ public class Amount extends BigDecimalAttribute {
 		super(aValue);
 	}
 
-	// TODO rt57, 11.10.2017: isValid => nicht negativ ?
+	@Override
+	protected Boolean isValid(BigDecimal aValue) {
+		return aValue != null && aValue.compareTo(BigDecimal.ZERO) > -1;
+	}
 
 	public static Amount fromValue(BigDecimal aValue) {
 		return new Amount(aValue);

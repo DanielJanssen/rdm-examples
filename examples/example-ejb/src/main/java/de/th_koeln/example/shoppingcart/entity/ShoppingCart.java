@@ -20,13 +20,12 @@ public class ShoppingCart {
 	private Order order;
 	private ShoppingCartCalculator calculator;
 
-	//TODO	kann nicht über den Builder gesetzt werden? Was ist wenn es aus der DB geladen wird?
-
 	private ShoppingCart(Builder aBuilder) {
 		id = ShoppingCartId.fromValue();
 		state = State.NOT_ORDERED;
 		userAccount = aBuilder.getUserAccount();
 		items = aBuilder.getItems();
+		//TODO	kann nicht über den Builder gesetzt werden? Was ist wenn es aus der DB geladen wird?
 		calculator = aBuilder.getCalculator();
 	}
 
