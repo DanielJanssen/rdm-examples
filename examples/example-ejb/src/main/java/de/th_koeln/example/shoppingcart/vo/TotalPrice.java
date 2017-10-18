@@ -24,6 +24,11 @@ public class TotalPrice {
 	}
 
 	@Override
+	public String toString() {
+		return amount.toString() + " " + currency.toString();
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

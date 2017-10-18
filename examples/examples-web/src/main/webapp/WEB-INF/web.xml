@@ -34,6 +34,6 @@
 		<mime-type>application/vnd.ms-fontobject</mime-type>
 	</mime-mapping>
 	<welcome-file-list>
-		<welcome-file>form.xhtml</welcome-file>
+		<welcome-file>/pages/shoppingCart.xhtml</welcome-file>
 	</welcome-file-list>
 </web-app>

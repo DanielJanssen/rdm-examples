@@ -8,7 +8,6 @@ import de.th_koeln.example.shoppingcart.attribute.ShoppingCartId;
 import de.th_koeln.example.shoppingcart.calculator.ShoppingCartCalculator;
 import de.th_koeln.example.shoppingcart.calculator.ShoppingCartCalculatorDefault;
 import de.th_koeln.example.shoppingcart.enums.OrderState;
-import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
 import de.th_koeln.example.shoppingcart.vo.TotalPrice;
 
 public class ShoppingCart {
@@ -118,12 +117,12 @@ public class ShoppingCart {
 		return items;
 	}
 
-	protected OrderState getState() {
+	public OrderState getState() {
 		return state;
 	}
 
-	public PricePerPiece getTotalPrice() {
-		return null;
+	public Order getOrder() {
+		return order;
 	}
 
 	@Override

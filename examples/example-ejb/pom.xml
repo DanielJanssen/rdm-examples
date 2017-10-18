@@ -31,7 +31,6 @@
 			<groupId>de.th-koeln.janssen</groupId>
 			<artifactId>rdm-ejb</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

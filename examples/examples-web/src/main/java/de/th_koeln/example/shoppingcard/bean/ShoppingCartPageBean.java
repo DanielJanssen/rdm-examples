@@ -1,16 +1,29 @@
 package de.th_koeln.example.shoppingcard.bean;
 
-import javax.annotation.ManagedBean;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-@ManagedBean
+import de.th_koeln.example.shoppingcart.entity.ShoppingCart;
+import de.th_koeln.example.shoppingcart.service.ShoppingCartService;
+
+@Named
+@RequestScoped
 public class ShoppingCartPageBean {
-	private String name;
 
-	public String getName() {
-		return name;
+	private ShoppingCart shoppingCart;
+
+	@Inject
+	ShoppingCartService service;
+
+	@PostConstruct
+	public void init() {
+		shoppingCart = service.getAllShoppingCarts().get(0);
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public ShoppingCart getShoppingCart() {
+		return shoppingCart;
 	}
+
 }
