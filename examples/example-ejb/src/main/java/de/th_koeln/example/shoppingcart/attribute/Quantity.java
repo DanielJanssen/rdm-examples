@@ -1,10 +1,20 @@
 package de.th_koeln.example.shoppingcart.attribute;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
 import de.th_koeln.rdm.attribute.IntegerAttribute;
 
+@Embeddable
+@AttributeOverride(name = "value", column = @Column(name = "Quantity"))
 public class Quantity extends IntegerAttribute {
 
 	private static final long serialVersionUID = 1L;
+
+	protected Quantity() { //needed for JPA
+		super();
+	}
 
 	private Quantity(Integer aQuantity) {
 		super(aQuantity);

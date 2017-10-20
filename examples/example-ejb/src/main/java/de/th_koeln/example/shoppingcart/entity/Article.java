@@ -1,16 +1,29 @@
 package de.th_koeln.example.shoppingcart.entity;
 
+import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+
 import de.th_koeln.example.shoppingcart.attribute.ArticleDescription;
 import de.th_koeln.example.shoppingcart.attribute.ArticleId;
 import de.th_koeln.example.shoppingcart.attribute.ArticleName;
 import de.th_koeln.example.shoppingcart.attribute.ArticleNumber;
 
+@Entity
 public class Article {
 
+	@EmbeddedId
 	private ArticleId id;
+	@Embedded
 	private ArticleNumber number;
+	@Embedded
 	private ArticleName name;
+	@Embedded
 	private ArticleDescription description;
+
+	protected Article() {
+		super();
+	}
 
 	private Article(Builder aBuilder) {
 		super();

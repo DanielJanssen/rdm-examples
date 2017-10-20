@@ -4,10 +4,29 @@
 	<persistence-unit name="examples-ejb" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>jboss/DataSource/mysqlrdm</jta-data-source>
-		<class>de.th_koeln.example.shoppingcart.entity.Test</class>
+		<class>de.th_koeln.example.shoppingcart.attribute.Amount</class>
+		<class>de.th_koeln.example.shoppingcart.attribute.ArticleDescription</class>
+		<class>de.th_koeln.example.shoppingcart.attribute.ArticleId</class>
+		<class>de.th_koeln.example.shoppingcart.attribute.ArticleName</class>
+		<class>de.th_koeln.example.shoppingcart.attribute.ArticleNumber</class>
+		<class>de.th_koeln.example.shoppingcart.attribute.Currency</class>
+		<class>de.th_koeln.example.shoppingcart.attribute.OrderDate</class>
+		<class>de.th_koeln.example.shoppingcart.attribute.OrderId</class>
+		<class>de.th_koeln.example.shoppingcart.attribute.Quantity</class>
+		<class>de.th_koeln.example.shoppingcart.attribute.ShoppingCartId</class>
+		<class>de.th_koeln.example.shoppingcart.attribute.ShoppingCartItemId</class>
+		<class>de.th_koeln.example.shoppingcart.attribute.UserAccountId</class>
+		<class>de.th_koeln.example.shoppingcart.entity.Article</class>
+		<class>de.th_koeln.example.shoppingcart.entity.Order</class>
+		<class>de.th_koeln.example.shoppingcart.entity.ShoppingCart</class>
+		<class>de.th_koeln.example.shoppingcart.entity.ShoppingCartItem</class>
+		<class>de.th_koeln.example.shoppingcart.entity.UserAccount</class>
+		<class>de.th_koeln.example.shoppingcart.vo.PricePerPiece</class>
+		<class>de.th_koeln.example.shoppingcart.vo.TotalPrice</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
 		</properties>
 	</persistence-unit>
 </persistence>

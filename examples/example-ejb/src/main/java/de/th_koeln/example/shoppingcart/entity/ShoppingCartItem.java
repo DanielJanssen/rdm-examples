@@ -1,19 +1,35 @@
 package de.th_koeln.example.shoppingcart.entity;
 
+import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+
 import de.th_koeln.example.shoppingcart.attribute.Quantity;
 import de.th_koeln.example.shoppingcart.attribute.ShoppingCartItemId;
-import de.th_koeln.example.shoppingcart.calculator.ShoppingCartItemCalculatorDefault;
 import de.th_koeln.example.shoppingcart.calculator.ShoppingCartItemCalculator;
+import de.th_koeln.example.shoppingcart.calculator.ShoppingCartItemCalculatorDefault;
 import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
 import de.th_koeln.example.shoppingcart.vo.TotalPrice;
 
+@Entity
 public class ShoppingCartItem {
 
+	@EmbeddedId
 	private ShoppingCartItemId id;
+	@Embedded
 	private PricePerPiece pricePerPiece;
+	@Embedded
 	private Quantity numberOfPieces;
+	@ManyToOne
 	private Article article;
+	@Transient
 	private ShoppingCartItemCalculator calculator;
+
+	protected ShoppingCartItem() {
+		super();
+	}
 
 	private ShoppingCartItem(Builder aBuilder) {
 		super();

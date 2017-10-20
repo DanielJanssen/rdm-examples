@@ -2,18 +2,33 @@ package de.th_koeln.example.shoppingcart.entity;
 
 import java.util.Date;
 
+import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+
 import de.th_koeln.example.shoppingcart.attribute.OrderDate;
 import de.th_koeln.example.shoppingcart.attribute.OrderId;
 import de.th_koeln.example.shoppingcart.vo.TotalPrice;
 
+@Entity
 public class Order {
 
+	@EmbeddedId
 	private OrderId id;
+	@OneToOne(mappedBy = "order")
 	private ShoppingCart shoppingCart;
+	@Embedded
 	private TotalPrice totalPrice;
+	@Embedded
 	private OrderDate orderDate;
 
+	protected Order() {
+		super();
+	}
+
 	private Order(Builder aBuilder) {
+		super();
 		id = OrderId.fromValue();
 		orderDate = OrderDate.fromValue(new Date());
 		shoppingCart = aBuilder.getShoppingCart();

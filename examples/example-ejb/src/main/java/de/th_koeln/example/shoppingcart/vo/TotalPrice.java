@@ -2,15 +2,26 @@ package de.th_koeln.example.shoppingcart.vo;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+
 import de.th_koeln.example.shoppingcart.attribute.Amount;
 import de.th_koeln.example.shoppingcart.attribute.Currency;
 
+@Embeddable
 public class TotalPrice {
 
+	@Embedded
 	private Amount amount;
+	@Embedded
 	private Currency currency;
 
-	public TotalPrice(Builder aBuider) {
+	protected TotalPrice() {
+		super();
+	}
+
+	private TotalPrice(Builder aBuider) {
+		super();
 		amount = aBuider.getValue();
 		currency = aBuider.getCurrency();
 	}

@@ -3,6 +3,13 @@ package de.th_koeln.example.shoppingcart.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+
 import de.th_koeln.example.shoppingcart.attribute.Quantity;
 import de.th_koeln.example.shoppingcart.attribute.ShoppingCartId;
 import de.th_koeln.example.shoppingcart.calculator.ShoppingCartCalculator;
@@ -10,16 +17,28 @@ import de.th_koeln.example.shoppingcart.calculator.ShoppingCartCalculatorDefault
 import de.th_koeln.example.shoppingcart.enums.OrderState;
 import de.th_koeln.example.shoppingcart.vo.TotalPrice;
 
+@Entity
 public class ShoppingCart {
 
+	@EmbeddedId
 	private ShoppingCartId id;
+	@ManyToOne
 	private UserAccount userAccount;
+	// TODO rt57, 20.10.2017: State noch definieren
 	private OrderState state;
+	@OneToMany
 	private List<ShoppingCartItem> items;
+	@OneToOne
 	private Order order;
+	@Transient
 	private ShoppingCartCalculator calculator;
 
+	protected ShoppingCart() {
+		super();
+	}
+
 	private ShoppingCart(Builder aBuilder) {
+		super();
 		id = ShoppingCartId.fromValue();
 		state = OrderState.NOT_ORDERED;
 		userAccount = aBuilder.getUserAccount();
