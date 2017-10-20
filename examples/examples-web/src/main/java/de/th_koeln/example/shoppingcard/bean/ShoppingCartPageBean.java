@@ -1,6 +1,7 @@
 package de.th_koeln.example.shoppingcard.bean;
 
-import javax.annotation.PostConstruct;
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -12,18 +13,20 @@ import de.th_koeln.example.shoppingcart.service.ShoppingCartService;
 @RequestScoped
 public class ShoppingCartPageBean {
 
-	private ShoppingCart shoppingCart;
+	private List<ShoppingCart> shoppingCarts;
 
 	@Inject
 	ShoppingCartService service;
 
-	@PostConstruct
 	public void init() {
-		shoppingCart = service.getAllShoppingCarts().get(0);
+		shoppingCarts = service.getAllShoppingCarts();
 	}
 
-	public ShoppingCart getShoppingCart() {
-		return shoppingCart;
+	public List<ShoppingCart> getShoppingCarts() {
+		if (shoppingCarts == null) {
+			init();
+		}
+		return shoppingCarts;
 	}
 
 }
