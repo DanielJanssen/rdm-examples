@@ -125,6 +125,10 @@ public class ShoppingCart {
 		return order;
 	}
 
+	public UserAccount getUserAccount() {
+		return userAccount;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

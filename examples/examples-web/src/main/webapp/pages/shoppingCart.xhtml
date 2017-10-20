@@ -6,19 +6,31 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+
 <h:body>
 	<h:form>
-		<p:dataTable
-			value="#{shoppingCartPageBean.shoppingCarts}"
-			var="entry"
-			editable="false">
-			<p:column headerText="State" >
-				<h:outputText value="#{entry.state}" />
-			</p:column>
-			<p:column headerText="Total Price">
-				<h:outputText value="#{entry.total.toString()}" />
-			</p:column>
-		</p:dataTable>
+		<p:panel header="All ShoppingCarts">
+			<p:dataTable
+				value="#{shoppingCartPageBean.shoppingCarts}"
+				var="entry"
+				editable="false">
+
+				<p:column headerText="User">
+					<h:outputText value="#{entry.userAccount}" />
+				</p:column>
+				<p:column headerText="State">
+					<h:outputText value="#{entry.state}" />
+				</p:column>
+				<p:column headerText="Total Price">
+					<h:outputText value="#{entry.total.toString()}" />
+				</p:column>
+				<p:column headerText="Order Date">
+					<h:outputText value="#{entry.order.orderDate}" />
+				</p:column>
+			</p:dataTable>
+		</p:panel>
 	</h:form>
 </h:body>
 
