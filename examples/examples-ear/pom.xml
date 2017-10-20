@@ -40,7 +40,18 @@
 							<artifactId>examples-web</artifactId>
 							<contextRoot>/examples/</contextRoot>
 						</webModule>
+						<ejbModule>
+							<groupId>de.th-koeln.rdm</groupId>
+							<artifactId>examples-ejb</artifactId>
+						</ejbModule>
+						<ejbModule>
+							<groupId>de.th-koeln.janssen</groupId>
+							<artifactId>rdm-ejb</artifactId>
+						</ejbModule>
 					</modules>
+					<unpackTypes>rar,war,ejb</unpackTypes>
+					<generateApplicationXml>true</generateApplicationXml>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
 				</configuration>
 			</plugin>
 		</plugins>
