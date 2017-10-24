@@ -10,7 +10,7 @@ import de.th_koeln.example.shoppingcart.vo.TotalPrice;
 
 public class ShoppingCartCalculatorDiscount implements ShoppingCartCalculator {
 
-	private static final BigDecimal DISCOUNT_IN_PERCENT = BigDecimal.valueOf(0, 9);
+	private static final BigDecimal DISCOUNT_IN_PERCENT = BigDecimal.valueOf(0.9);
 
 	@Override
 	public TotalPrice calculate(ShoppingCart aShoppingCart) {

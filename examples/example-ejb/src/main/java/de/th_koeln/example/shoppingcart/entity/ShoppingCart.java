@@ -3,18 +3,21 @@ package de.th_koeln.example.shoppingcart.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 
 import de.th_koeln.example.shoppingcart.attribute.Quantity;
 import de.th_koeln.example.shoppingcart.attribute.ShoppingCartId;
-import de.th_koeln.example.shoppingcart.calculator.ShoppingCartCalculator;
-import de.th_koeln.example.shoppingcart.calculator.ShoppingCartCalculatorDefault;
+import de.th_koeln.example.shoppingcart.enums.DiscountShoppingCartType;
 import de.th_koeln.example.shoppingcart.enums.OrderState;
+import de.th_koeln.example.shoppingcart.enums.converter.DiscountShoppingCartTypeConverter;
+import de.th_koeln.example.shoppingcart.enums.converter.OrderStateConverter;
 import de.th_koeln.example.shoppingcart.vo.TotalPrice;
 
 @Entity
@@ -24,14 +27,16 @@ public class ShoppingCart {
 	private ShoppingCartId id;
 	@ManyToOne
 	private UserAccount userAccount;
-	// TODO rt57, 20.10.2017: State noch definieren
+	@Column
+	@Convert(converter = OrderStateConverter.class)
 	private OrderState state;
-	@OneToMany
+	@OneToMany(mappedBy = "shoppingCart", targetEntity = ShoppingCartItem.class, fetch = FetchType.EAGER)
 	private List<ShoppingCartItem> items;
 	@OneToOne
 	private Order order;
-	@Transient
-	private ShoppingCartCalculator calculator;
+	@Column
+	@Convert(converter = DiscountShoppingCartTypeConverter.class)
+	private DiscountShoppingCartType discountType;
 
 	protected ShoppingCart() {
 		super();
@@ -43,8 +48,7 @@ public class ShoppingCart {
 		state = OrderState.NOT_ORDERED;
 		userAccount = aBuilder.getUserAccount();
 		items = aBuilder.getItems();
-		//TODO	kann nicht über den Builder gesetzt werden? Was ist wenn es aus der DB geladen wird?
-		calculator = aBuilder.getCalculator();
+		discountType = aBuilder.geDiscountShoppingCartType();
 	}
 
 	//was ist wenn sich der price des Artikels geändert hat?
@@ -122,7 +126,7 @@ public class ShoppingCart {
 		if (isOrdered()) {
 			return order.getTotalPrice();
 		}
-		return calculator.calculate(this);
+		return discountType.getCalculator().calculate(this);
 	}
 
 	private Boolean isOrdered() {
@@ -181,7 +185,7 @@ public class ShoppingCart {
 	public static class Builder {
 		private UserAccount userAccount;
 		private List<ShoppingCartItem> items = new ArrayList<>();
-		private ShoppingCartCalculator calculator = new ShoppingCartCalculatorDefault();
+		private DiscountShoppingCartType discountType = DiscountShoppingCartType.NONE;
 
 		public List<ShoppingCartItem> getItems() {
 			return items;
@@ -191,8 +195,8 @@ public class ShoppingCart {
 			return userAccount;
 		}
 
-		public ShoppingCartCalculator getCalculator() {
-			return calculator;
+		public DiscountShoppingCartType geDiscountShoppingCartType() {
+			return discountType;
 		}
 
 		public Builder withUserAccount(UserAccount anUserAccount) {
@@ -210,8 +214,8 @@ public class ShoppingCart {
 			return this;
 		}
 
-		public Builder withCalculator(ShoppingCartCalculator aCalculator) {
-			calculator = aCalculator;
+		public Builder withDisocuntType(DiscountShoppingCartType aDiscountType) {
+			discountType = aDiscountType;
 			return this;
 		}
 

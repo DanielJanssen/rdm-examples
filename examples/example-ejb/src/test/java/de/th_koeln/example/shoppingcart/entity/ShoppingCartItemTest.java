@@ -7,8 +7,7 @@ import java.math.BigDecimal;
 import org.junit.Test;
 
 import de.th_koeln.example.shoppingcart.attribute.Quantity;
-import de.th_koeln.example.shoppingcart.calculator.ShoppingCartItemCalculatorDefault;
-import de.th_koeln.example.shoppingcart.calculator.ShoppingCartItemCalculatorThreeForTwo;
+import de.th_koeln.example.shoppingcart.enums.DiscountShoppingCartItemType;
 import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
 import de.th_koeln.example.shoppingcart.vo.TotalPrice;
 
@@ -47,7 +46,7 @@ public class ShoppingCartItemTest {
 	@Test
 	public void testGetTotal_DefaultCalculator() {
 		ShoppingCartItem sut = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(5).forPricePerPiece(getDummyPrice())
-				.withCalculator(new ShoppingCartItemCalculatorDefault()).build();
+				.withDiscountType(DiscountShoppingCartItemType.NONE).build();
 		TotalPrice actual = sut.getTotalPrice();
 		TotalPrice expected = new TotalPrice.Builder().withAmount(new BigDecimal(25)).forCurrency("Euro").build();
 		assertEquals(expected, actual);
@@ -56,7 +55,7 @@ public class ShoppingCartItemTest {
 	@Test
 	public void testGetTotal_ThreeForTwoCalculator() {
 		ShoppingCartItem sut = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(5).forPricePerPiece(getDummyPrice())
-				.withCalculator(new ShoppingCartItemCalculatorThreeForTwo()).build();
+				.withDiscountType(DiscountShoppingCartItemType.THREE_FOR_TWO).build();
 		TotalPrice actual = sut.getTotalPrice();
 		TotalPrice expected = new TotalPrice.Builder().withAmount(new BigDecimal(20)).forCurrency("Euro").build();
 		assertEquals(expected, actual);

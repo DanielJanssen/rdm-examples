@@ -6,12 +6,14 @@ import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import de.th_koeln.example.shoppingcart.attribute.OrderDate;
 import de.th_koeln.example.shoppingcart.attribute.OrderId;
 import de.th_koeln.example.shoppingcart.vo.TotalPrice;
 
 @Entity
+@Table(name = "ordering")
 public class Order {
 
 	@EmbeddedId

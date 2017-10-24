@@ -13,28 +13,9 @@ public enum OrderState {
 		label = aLabel;
 	}
 
-	public static OrderState encode(String aCode) {
-		if (aCode == null) {
-			return null;
-		}
-		for (OrderState tempOrderStatus : OrderState.values()) {
-			if (aCode.equals(tempOrderStatus.getLabel())) {
-				return tempOrderStatus;
-			}
-		}
-		throw new IllegalArgumentException("State not found. Illegal Code " + aCode);
-	}
-
-	public static String decode(OrderState aOrderStatus) {
-		if (aOrderStatus == null) {
-			return null;
-		}
-		return aOrderStatus.getLabel();
-	}
-
 	@Override
 	public String toString() {
-		return name();
+		return getLabel();
 	}
 
 	public String getLabel() {

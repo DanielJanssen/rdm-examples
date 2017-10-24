@@ -1,15 +1,16 @@
 package de.th_koeln.example.shoppingcart.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
 
 import de.th_koeln.example.shoppingcart.attribute.Quantity;
 import de.th_koeln.example.shoppingcart.attribute.ShoppingCartItemId;
-import de.th_koeln.example.shoppingcart.calculator.ShoppingCartItemCalculator;
-import de.th_koeln.example.shoppingcart.calculator.ShoppingCartItemCalculatorDefault;
+import de.th_koeln.example.shoppingcart.enums.DiscountShoppingCartItemType;
+import de.th_koeln.example.shoppingcart.enums.converter.DiscountShoppingCartItemTypeConverter;
 import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
 import de.th_koeln.example.shoppingcart.vo.TotalPrice;
 
@@ -24,8 +25,11 @@ public class ShoppingCartItem {
 	private Quantity numberOfPieces;
 	@ManyToOne
 	private Article article;
-	@Transient
-	private ShoppingCartItemCalculator calculator;
+	@ManyToOne
+	private ShoppingCart shoppingCart;
+	@Column
+	@Convert(converter = DiscountShoppingCartItemTypeConverter.class)
+	private DiscountShoppingCartItemType discountType;
 
 	protected ShoppingCartItem() {
 		super();
@@ -37,7 +41,7 @@ public class ShoppingCartItem {
 		pricePerPiece = aBuilder.getPricePerPiece();
 		numberOfPieces = aBuilder.getQuantity();
 		article = aBuilder.getArticle();
-		calculator = aBuilder.getCalculator();
+		discountType = aBuilder.getDiscountType();
 	}
 
 	public void addNumberOfPieces(Quantity aNumberOfPieces) {
@@ -49,7 +53,7 @@ public class ShoppingCartItem {
 	}
 
 	public TotalPrice getTotalPrice() {
-		return calculator.calculate(this);
+		return discountType.getCalculator().calculate(this);
 	}
 
 	public ShoppingCartItemId getId() {
@@ -66,6 +70,10 @@ public class ShoppingCartItem {
 
 	public Article getArticle() {
 		return article;
+	}
+
+	public ShoppingCart getShoppingCart() {
+		return shoppingCart;
 	}
 
 	@Override
@@ -102,7 +110,7 @@ public class ShoppingCartItem {
 		private PricePerPiece price;
 		private Quantity quantity;
 		private Article article;
-		private ShoppingCartItemCalculator calculator = new ShoppingCartItemCalculatorDefault();
+		private DiscountShoppingCartItemType discountType = DiscountShoppingCartItemType.NONE;
 
 		public PricePerPiece getPricePerPiece() {
 			return price;
@@ -116,8 +124,8 @@ public class ShoppingCartItem {
 			return article;
 		}
 
-		public ShoppingCartItemCalculator getCalculator() {
-			return calculator;
+		public DiscountShoppingCartItemType getDiscountType() {
+			return discountType;
 		}
 
 		public Builder forPricePerPiece(PricePerPiece aPrice) {
@@ -139,8 +147,8 @@ public class ShoppingCartItem {
 			return this;
 		}
 
-		public Builder withCalculator(ShoppingCartItemCalculator aCalculator) {
-			calculator = aCalculator;
+		public Builder withDiscountType(DiscountShoppingCartItemType aDiscountType) {
+			discountType = aDiscountType;
 			return this;
 		}
 
