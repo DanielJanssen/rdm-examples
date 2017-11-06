@@ -5,7 +5,8 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 </h:head>
 
@@ -13,9 +14,13 @@
 	<h:form>
 		<p:panel header="All ShoppingCarts">
 			<p:dataTable
+				id="shoppingCartTable"
 				value="#{shoppingCartPageBean.shoppingCarts}"
 				var="entry"
-				editable="false">
+				editable="false"
+				selection="#{shoppingCartPageBean.selectedShoppingCart}"
+				selectionMode="single"
+				rowKey="#{entry.id}">
 
 				<p:column headerText="User">
 					<h:outputText value="#{entry.userAccount}" />
@@ -29,7 +34,7 @@
 				<p:column headerText="Order Date">
 					<h:outputText value="#{entry.order.orderDate}" />
 				</p:column>
-				<p:column headerText="Show Items">
+				<p:column headerText="Actions">
 					<p:commandButton
 						id="itemButton"
 						value="Show Items"
@@ -56,11 +61,37 @@
 							</p:column>
 						</p:dataTable>
 					</p:overlayPanel>
+
+
 				</p:column>
 			</p:dataTable>
+			<p:commandButton
+				value="Add Item"
+				process="@this"
+				action="#{shoppingCartPageBean.openItemDialog()}"
+				oncomplete="PF('addItemDialog').show();">
+			</p:commandButton>
 		</p:panel>
 
+		<p:dialog
+			id="addItemDialog"
+			header="Add Items"
+			widgetVar="addItemDialog"
+			modal="true"
+			height="100"
+			closable="false">
+			<p:inputText
+				value="#{shoppingCartAddItemDialogBean.shoppingCartItem.quantity}"
+				label="Quantity"
+				type="number">
+				<f:ajax
+					execute="@this"
+					event="blur" />
+			</p:inputText>
+			<p:commandButton
+				value="Cancel"
+				onclick="addItemDialog.hide()" />
+		</p:dialog>
 	</h:form>
 </h:body>
-
 </html>

@@ -135,6 +135,8 @@ public class ShoppingCartItem {
 
 		public Builder withQuantity(Integer aQuantity) {
 			return withQuantity(Quantity.fromValue(aQuantity));
+			//			quantity = Quantity.fromValue(aQuantity);
+			//			return this;
 		}
 
 		public Builder withQuantity(Quantity aQuantity) {
