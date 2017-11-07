@@ -89,21 +89,21 @@ public class PricePerPiece {
 		}
 
 		public Builder withAmount(BigDecimal aValue) {
-			return withAmount(Amount.fromValue(aValue));
+			value = Amount.fromValue(aValue);
+			return this;
 		}
 
 		public Builder withAmount(Amount aValue) {
-			value = aValue;
-			return this;
+			return withAmount(aValue.getValue());
 		}
 
 		public Builder forCurrency(String aCurrency) {
-			return forCurrency(Currency.fromValue(aCurrency));
+			currency = Currency.fromValue(aCurrency);
+			return this;
 		}
 
 		public Builder forCurrency(Currency aCurrency) {
-			currency = aCurrency;
-			return this;
+			return forCurrency(aCurrency.getValue());
 		}
 
 		public PricePerPiece build() {

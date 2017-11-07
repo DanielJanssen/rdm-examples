@@ -80,7 +80,7 @@ public class ShoppingCartItemTest {
 	}
 
 	private Article getDummyArticle() {
-		return new Article.Builder().withNumber(12345).withName("Name").withDescription("Description").build();
+		return new Article.Builder().withNumber(12345).withName("Name").withDescription("Description").forPricePerPiece(getDummyPrice()).build();
 	}
 
 	private PricePerPiece getDummyPrice() {

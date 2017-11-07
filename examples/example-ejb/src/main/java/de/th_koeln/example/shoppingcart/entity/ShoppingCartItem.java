@@ -134,17 +134,18 @@ public class ShoppingCartItem {
 		}
 
 		public Builder forPricePerPiece(PricePerPiece aPrice) {
-			price = aPrice;
+			price = new PricePerPiece.Builder().forCurrency(aPrice.getCurrency()).withAmount(aPrice.getAmount()).build();
 			return this;
 		}
 
 		public Builder withQuantity(Integer aQuantity) {
-			return withQuantity(Quantity.fromValue(aQuantity));
+			quantity = Quantity.fromValue(aQuantity);
+			return this;
 		}
 
 		public Builder withQuantity(Quantity aQuantity) {
-			quantity = aQuantity;
-			return this;
+			return withQuantity(aQuantity.getValue());
+
 		}
 
 		public Builder withArticle(Article anArticle) {

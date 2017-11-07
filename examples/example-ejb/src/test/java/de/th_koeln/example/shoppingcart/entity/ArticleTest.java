@@ -2,12 +2,14 @@ package de.th_koeln.example.shoppingcart.entity;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
+
 import org.junit.Test;
 
 import de.th_koeln.example.shoppingcart.attribute.ArticleDescription;
 import de.th_koeln.example.shoppingcart.attribute.ArticleName;
 import de.th_koeln.example.shoppingcart.attribute.ArticleNumber;
-import de.th_koeln.example.shoppingcart.entity.Article;
+import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
 
 public class ArticleTest {
 
@@ -33,12 +35,16 @@ public class ArticleTest {
 
 	@Test()
 	public void testArticleBuilder() {
-		Article actual = new Article.Builder().withNumber(12345).withName("Name").withDescription("Description").build();
+		Article actual = new Article.Builder().withNumber(12345).withName("Name").withDescription("Description").forPricePerPiece(getDummyPrice()).build();
 		assertNotNull(actual);
 		assertNotNull(actual.getId());
 		assertEquals(ArticleNumber.fromValue(12345), actual.getNumber());
 		assertEquals(ArticleName.fromValue("Name"), actual.getName());
 		assertEquals(ArticleDescription.fromValue("Description"), actual.getDescription());
+	}
+
+	private PricePerPiece getDummyPrice() {
+		return new PricePerPiece.Builder().withAmount(new BigDecimal(5)).forCurrency("Euro").build();
 	}
 
 }

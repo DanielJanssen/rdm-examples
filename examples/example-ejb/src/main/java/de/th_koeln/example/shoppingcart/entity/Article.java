@@ -21,6 +21,8 @@ public class Article {
 	private ArticleName name;
 	@Embedded
 	private ArticleDescription description;
+	@Embedded
+	private PricePerPiece price;
 
 	protected Article() {
 		super();
@@ -32,6 +34,7 @@ public class Article {
 		number = aBuilder.getNumber();
 		name = aBuilder.getName();
 		description = aBuilder.getDescription();
+		price = aBuilder.getPrice();
 	}
 
 	public ArticleId getId() {
@@ -48,6 +51,10 @@ public class Article {
 
 	public ArticleDescription getDescription() {
 		return description;
+	}
+
+	public PricePerPiece getPrice() {
+		return price;
 	}
 
 	@Override
@@ -90,6 +97,7 @@ public class Article {
 		private ArticleNumber number;
 		private ArticleName name;
 		private ArticleDescription description;
+		private PricePerPiece price;
 
 		public ArticleNumber getNumber() {
 			return number;
@@ -103,30 +111,39 @@ public class Article {
 			return description;
 		}
 
+		public PricePerPiece getPrice() {
+			return price;
+		}
+
 		public Builder withNumber(Integer aNumber) {
-			return withNumber(ArticleNumber.fromValue(aNumber));
+			number = ArticleNumber.fromValue(aNumber);
+			return this;
 		}
 
 		public Builder withNumber(ArticleNumber aNumber) {
-			number = aNumber;
-			return this;
+			return withNumber(aNumber.getValue());
 		}
 
 		public Builder withName(String aName) {
-			return withName(ArticleName.fromValue(aName));
-		}
-
-		public Builder withName(ArticleName aName) {
-			name = aName;
+			name = ArticleName.fromValue(aName);
 			return this;
 		}
 
+		public Builder withName(ArticleName aName) {
+			return withName(aName.getValue());
+		}
+
 		public Builder withDescription(String aDescription) {
-			return withDescription(ArticleDescription.fromValue(aDescription));
+			description = ArticleDescription.fromValue(aDescription);
+			return this;
 		}
 
 		public Builder withDescription(ArticleDescription aDescription) {
-			description = aDescription;
+			return withDescription(aDescription.getValue());
+		}
+
+		public Builder forPricePerPiece(PricePerPiece aPrice) {
+			price = new PricePerPiece.Builder().forCurrency(aPrice.getCurrency()).withAmount(aPrice.getAmount()).build();
 			return this;
 		}
 
@@ -137,16 +154,17 @@ public class Article {
 
 		private void isValid() {
 			if (number == null || number.isNullOrEmpty()) {
-				throw new IllegalStateException("Number has to be set for building a Article");
+				throw new IllegalStateException("Number has to be set for building an Article");
 			}
 			if (name == null || name.isNullOrEmpty()) {
-				throw new IllegalStateException("Name has to be set for building a Article");
+				throw new IllegalStateException("Name has to be set for building an Article");
 			}
 			if (description == null || description.isNullOrEmpty()) {
-				throw new IllegalStateException("Description has to be set for building a Article");
+				throw new IllegalStateException("Description has to be set for building an Article");
+			}
+			if (price == null) {
+				throw new IllegalStateException("Price has to be set for building an Article");
 			}
 		}
-
 	}
-
 }

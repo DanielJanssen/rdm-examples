@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 
-import de.th_koeln.example.shoppingcart.calculator.ShoppingCartItemCalculatorThreeForTwo;
 import de.th_koeln.example.shoppingcart.entity.Article;
 import de.th_koeln.example.shoppingcart.entity.ShoppingCartItem;
 import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
@@ -55,7 +54,7 @@ public class ShoppingCartItemCalculatorThreeForTwoTest {
 	}
 
 	private Article getDummyArticle() {
-		return new Article.Builder().withNumber(12345).withName("Name").withDescription("Description").build();
+		return new Article.Builder().withNumber(12345).withName("Name").withDescription("Description").forPricePerPiece(getDummyPrice()).build();
 	}
 
 	private PricePerPiece getDummyPrice() {
