@@ -3,6 +3,7 @@ package de.th_koeln.example.shoppingcart.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.EmbeddedId;
@@ -30,7 +31,7 @@ public class ShoppingCart {
 	@Column
 	@Convert(converter = OrderStateConverter.class)
 	private OrderState state;
-	@OneToMany(mappedBy = "shoppingCart", targetEntity = ShoppingCartItem.class, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "shoppingCart", targetEntity = ShoppingCartItem.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ShoppingCartItem> items;
 	@OneToOne
 	private Order order;
@@ -59,7 +60,9 @@ public class ShoppingCart {
 				ShoppingCartItem existingItem = getItem(anItem);
 				existingItem.addNumberOfPieces(anItem.getNumberOfPieces());
 			} else {
+				// TODO rt57, 07.11.2017: hmm die rückbeziehung setzen vll woanders?!
 				items.add(anItem);
+				anItem.setShoppingCart(this);
 			}
 		} else {
 			throw new IllegalStateException("You cannot remove an Item if the ShoppingCart is still ordered");

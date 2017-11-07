@@ -8,10 +8,20 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
+	<style type="text/css">
+.ui-growl {
+	right: 50%;
+	top: 50%;
+}
+</style>
 </h:head>
 
 <h:body>
 	<h:form>
+		<p:growl
+			id="growl"
+			showDetail="true" />
+
 		<p:panel header="All ShoppingCarts">
 			<p:dataTable
 				id="shoppingCartTable"
@@ -21,7 +31,6 @@
 				selection="#{shoppingCartPageBean.selectedShoppingCart}"
 				selectionMode="single"
 				rowKey="#{entry.id}">
-
 				<p:column headerText="User">
 					<h:outputText value="#{entry.userAccount}" />
 				</p:column>
@@ -61,37 +70,58 @@
 							</p:column>
 						</p:dataTable>
 					</p:overlayPanel>
-
-
 				</p:column>
 			</p:dataTable>
 			<p:commandButton
+				id="addItemButton"
 				value="Add Item"
-				process="@this"
-				action="#{shoppingCartPageBean.openItemDialog()}"
-				oncomplete="PF('addItemDialog').show();">
+				process="addItemButton shoppingCartTable"
+				update="addItemDialog growl"
+				action="#{shoppingCartPageBean.openItemDialog()}">
 			</p:commandButton>
 		</p:panel>
+	</h:form>
 
-		<p:dialog
-			id="addItemDialog"
-			header="Add Items"
-			widgetVar="addItemDialog"
-			modal="true"
-			height="100"
-			closable="false">
+	<p:dialog
+		id="addItemDialog"
+		header="Add Items"
+		widgetVar="addItemDialogVar"
+		modal="true"
+		height="100"
+		closable="false">
+		<h:form>
 			<p:inputText
+				id="quantityInput"
 				value="#{shoppingCartAddItemDialogBean.shoppingCartItem.quantity}"
 				label="Quantity"
-				type="number">
+				style="width:250px" />
+			<br />
+			<p:selectOneMenu
+				id="articleDropdown"
+				value="#{shoppingCartAddItemDialogBean.selectedArticle}"
+				label="Article"
+				style="width:250px">
 				<f:ajax
 					execute="@this"
-					event="blur" />
-			</p:inputText>
+					render="@this"
+					event="change" />
+				<f:selectItems
+					value="#{shoppingCartAddItemDialogBean.articles}"
+					itemValue="#{entry.id}"
+					var="entry" />
+			</p:selectOneMenu>
+			<br />
+			<p:commandButton
+				id="saveButton"
+				value="Save"
+				process="saveButton quantityInput"
+				action="#{shoppingCartAddItemDialogBean.save()}">
+			</p:commandButton>
 			<p:commandButton
 				value="Cancel"
-				onclick="addItemDialog.hide()" />
-		</p:dialog>
-	</h:form>
+				immediate="true"
+				onclick="PF('addItemDialogVar').hide()" />
+		</h:form>
+	</p:dialog>
 </h:body>
 </html>

@@ -29,6 +29,10 @@ public class ArticleId extends UuidAttribute {
 		return new ArticleId(UUID.randomUUID().toString());
 	}
 
+	public static ArticleId fromValue(String anUuid) {
+		return new ArticleId(anUuid);
+	}
+
 	@Override
 	public final boolean equals(Object aObj) { //needed for jpa
 		return super.equals(aObj);

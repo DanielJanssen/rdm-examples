@@ -8,6 +8,7 @@ import de.th_koeln.example.shoppingcart.attribute.ArticleDescription;
 import de.th_koeln.example.shoppingcart.attribute.ArticleId;
 import de.th_koeln.example.shoppingcart.attribute.ArticleName;
 import de.th_koeln.example.shoppingcart.attribute.ArticleNumber;
+import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
 
 @Entity
 public class Article {
@@ -47,6 +48,11 @@ public class Article {
 
 	public ArticleDescription getDescription() {
 		return description;
+	}
+
+	@Override
+	public String toString() {
+		return getName().toString();
 	}
 
 	@Override

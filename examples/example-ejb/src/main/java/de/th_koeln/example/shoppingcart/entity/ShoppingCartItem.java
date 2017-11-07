@@ -1,5 +1,6 @@
 package de.th_koeln.example.shoppingcart.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Embedded;
@@ -25,7 +26,7 @@ public class ShoppingCartItem {
 	private Quantity numberOfPieces;
 	@ManyToOne
 	private Article article;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private ShoppingCart shoppingCart;
 	@Column
 	@Convert(converter = DiscountShoppingCartItemTypeConverter.class)
@@ -50,6 +51,10 @@ public class ShoppingCartItem {
 
 	public void reduceNumberOfPieces(Quantity aNumberOfPieces) {
 		numberOfPieces = numberOfPieces.reduce(aNumberOfPieces);
+	}
+
+	public void setShoppingCart(ShoppingCart aShoppingCart) {
+		shoppingCart = aShoppingCart;
 	}
 
 	public TotalPrice getTotalPrice() {
@@ -135,8 +140,6 @@ public class ShoppingCartItem {
 
 		public Builder withQuantity(Integer aQuantity) {
 			return withQuantity(Quantity.fromValue(aQuantity));
-			//			quantity = Quantity.fromValue(aQuantity);
-			//			return this;
 		}
 
 		public Builder withQuantity(Quantity aQuantity) {

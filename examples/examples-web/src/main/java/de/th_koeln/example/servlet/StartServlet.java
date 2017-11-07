@@ -30,6 +30,7 @@ public class StartServlet extends GenericServlet {
 			searchPathAsSet.add("de.th_koeln.example.propertyeditor");
 
 			PropertyEditorManager.setEditorSearchPath(searchPathAsSet.toArray(new String[0]));
+
 		}
 	}
 }
