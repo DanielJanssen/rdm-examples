@@ -39,9 +39,9 @@ public class ShoppingCartItem {
 	private ShoppingCartItem(Builder aBuilder) {
 		super();
 		id = ShoppingCartItemId.fromValue();
-		pricePerPiece = aBuilder.getPricePerPiece();
 		numberOfPieces = aBuilder.getQuantity();
 		article = aBuilder.getArticle();
+		pricePerPiece = article.getPrice();
 		discountType = aBuilder.getDiscountType();
 	}
 
@@ -112,14 +112,9 @@ public class ShoppingCartItem {
 	}
 
 	public static class Builder {
-		private PricePerPiece price;
 		private Quantity quantity;
 		private Article article;
 		private DiscountShoppingCartItemType discountType = DiscountShoppingCartItemType.NONE;
-
-		public PricePerPiece getPricePerPiece() {
-			return price;
-		}
 
 		public Quantity getQuantity() {
 			return quantity;
@@ -131,11 +126,6 @@ public class ShoppingCartItem {
 
 		public DiscountShoppingCartItemType getDiscountType() {
 			return discountType;
-		}
-
-		public Builder forPricePerPiece(PricePerPiece aPrice) {
-			price = new PricePerPiece.Builder().forCurrency(aPrice.getCurrency()).withAmount(aPrice.getAmount()).build();
-			return this;
 		}
 
 		public Builder withQuantity(Integer aQuantity) {
@@ -164,9 +154,6 @@ public class ShoppingCartItem {
 		}
 
 		private void isValid() {
-			if (price == null) {
-				throw new IllegalStateException("Price has to be set for building a ShoppingCar");
-			}
 			if (quantity == null || quantity.isNullOrEmpty()) {
 				throw new IllegalStateException("Quantity has to be set for building a ShoppingCar");
 			}

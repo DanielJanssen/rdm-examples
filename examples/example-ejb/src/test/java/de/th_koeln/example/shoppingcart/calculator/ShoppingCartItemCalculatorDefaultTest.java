@@ -16,7 +16,7 @@ public class ShoppingCartItemCalculatorDefaultTest {
 	@Test
 	public void testCalculate_1() {
 		ShoppingCartItemCalculatorDefault sut = new ShoppingCartItemCalculatorDefault();
-		ShoppingCartItem item = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(1).forPricePerPiece(getDummyPrice()).build();
+		ShoppingCartItem item = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(1).build();
 
 		TotalPrice actual = sut.calculate(item);
 		TotalPrice expected = new TotalPrice.Builder().withAmount(new BigDecimal(5)).forCurrency("Euro").build();
@@ -26,7 +26,7 @@ public class ShoppingCartItemCalculatorDefaultTest {
 	@Test
 	public void testCalculate_5() {
 		ShoppingCartItemCalculatorDefault sut = new ShoppingCartItemCalculatorDefault();
-		ShoppingCartItem item = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(5).forPricePerPiece(getDummyPrice()).build();
+		ShoppingCartItem item = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(5).build();
 
 		TotalPrice actual = sut.calculate(item);
 		TotalPrice expected = new TotalPrice.Builder().withAmount(new BigDecimal(25)).forCurrency("Euro").build();

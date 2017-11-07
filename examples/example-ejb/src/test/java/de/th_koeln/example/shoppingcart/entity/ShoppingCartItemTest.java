@@ -20,22 +20,17 @@ public class ShoppingCartItemTest {
 
 	@Test(expected = IllegalStateException.class)
 	public void testShoppingCartItemBuilder_withoutArticle() {
-		new ShoppingCartItem.Builder().withQuantity(1).forPricePerPiece(getDummyPrice()).build();
+		new ShoppingCartItem.Builder().withQuantity(1).build();
 	}
 
 	@Test(expected = IllegalStateException.class)
 	public void testShoppingCartItemBuilder_withoutQuantity() {
-		new ShoppingCartItem.Builder().withArticle(getDummyArticle()).forPricePerPiece(getDummyPrice()).build();
-	}
-
-	@Test(expected = IllegalStateException.class)
-	public void testShoppingCartItemBuilder_withoutPrice() {
-		new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(1).build();
+		new ShoppingCartItem.Builder().withArticle(getDummyArticle()).build();
 	}
 
 	@Test
 	public void testShoppingCartItemBuilder() {
-		ShoppingCartItem actual = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(1).forPricePerPiece(getDummyPrice()).build();
+		ShoppingCartItem actual = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(1).build();
 		assertNotNull(actual);
 		assertNotNull(actual.getId());
 		assertNotNull(actual.getArticle());
@@ -45,8 +40,8 @@ public class ShoppingCartItemTest {
 
 	@Test
 	public void testGetTotal_DefaultCalculator() {
-		ShoppingCartItem sut = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(5).forPricePerPiece(getDummyPrice())
-				.withDiscountType(DiscountShoppingCartItemType.NONE).build();
+		ShoppingCartItem sut = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(5).withDiscountType(DiscountShoppingCartItemType.NONE)
+				.build();
 		TotalPrice actual = sut.getTotalPrice();
 		TotalPrice expected = new TotalPrice.Builder().withAmount(new BigDecimal(25)).forCurrency("Euro").build();
 		assertEquals(expected, actual);
@@ -54,7 +49,7 @@ public class ShoppingCartItemTest {
 
 	@Test
 	public void testGetTotal_ThreeForTwoCalculator() {
-		ShoppingCartItem sut = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(5).forPricePerPiece(getDummyPrice())
+		ShoppingCartItem sut = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(5)
 				.withDiscountType(DiscountShoppingCartItemType.THREE_FOR_TWO).build();
 		TotalPrice actual = sut.getTotalPrice();
 		TotalPrice expected = new TotalPrice.Builder().withAmount(new BigDecimal(20)).forCurrency("Euro").build();
@@ -63,7 +58,7 @@ public class ShoppingCartItemTest {
 
 	@Test
 	public void testReduceNumberOfPieces() {
-		ShoppingCartItem sut = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(5).forPricePerPiece(getDummyPrice()).build();
+		ShoppingCartItem sut = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(5).build();
 		sut.reduceNumberOfPieces(Quantity.fromValue(2));
 		Quantity expected = Quantity.fromValue(3);
 		Quantity actual = sut.getNumberOfPieces();
@@ -72,7 +67,7 @@ public class ShoppingCartItemTest {
 
 	@Test
 	public void testAddNumberOfPieces() {
-		ShoppingCartItem sut = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(5).forPricePerPiece(getDummyPrice()).build();
+		ShoppingCartItem sut = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(5).build();
 		sut.addNumberOfPieces(Quantity.fromValue(2));
 		Quantity expected = Quantity.fromValue(7);
 		Quantity actual = sut.getNumberOfPieces();

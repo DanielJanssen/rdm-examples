@@ -146,11 +146,11 @@ public class ShoppingCartTest {
 	}
 
 	private ShoppingCartItem getDummyShoppingCartItem() {
-		return new ShoppingCartItem.Builder().withQuantity(1).withArticle(getDummyArticle()).forPricePerPiece(getDummyPrice()).build();
+		return new ShoppingCartItem.Builder().withQuantity(1).withArticle(getDummyArticle()).build();
 	}
 
 	private ShoppingCartItem getDummyShoppingCartItem2() {
-		return new ShoppingCartItem.Builder().withQuantity(10).withArticle(getDummyArticle2()).forPricePerPiece(getDummyPrice()).build();
+		return new ShoppingCartItem.Builder().withQuantity(10).withArticle(getDummyArticle2()).build();
 	}
 
 	private Article getDummyArticle() {

@@ -35,7 +35,6 @@ public class ShoppingCartService {
 	public void addItemToShoppingCart(ShoppingCartId aShoppingCartId, ShoppingCartItem.Builder shoppingCartItem, Article anArticle) {
 		//	TODO	das setzen hier ist auch nicht optimal
 		shoppingCartItem.withArticle(anArticle);
-		shoppingCartItem.forPricePerPiece(anArticle.getPrice());
 
 		ShoppingCart shoppingCart = getShoppingCart(aShoppingCartId);
 		shoppingCart.addItem(shoppingCartItem.build());

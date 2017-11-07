@@ -16,7 +16,7 @@ public class ShoppingCartItemCalculatorThreeForTwoTest {
 	@Test
 	public void testCalculate_1() {
 		ShoppingCartItemCalculatorThreeForTwo sut = new ShoppingCartItemCalculatorThreeForTwo();
-		ShoppingCartItem item = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(1).forPricePerPiece(getDummyPrice()).build();
+		ShoppingCartItem item = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(1).build();
 
 		TotalPrice actual = sut.calculate(item);
 		TotalPrice expected = new TotalPrice.Builder().withAmount(new BigDecimal(5)).forCurrency("Euro").build();
@@ -26,7 +26,7 @@ public class ShoppingCartItemCalculatorThreeForTwoTest {
 	@Test
 	public void testCalculate_3() {
 		ShoppingCartItemCalculatorThreeForTwo sut = new ShoppingCartItemCalculatorThreeForTwo();
-		ShoppingCartItem item = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(3).forPricePerPiece(getDummyPrice()).build();
+		ShoppingCartItem item = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(3).build();
 
 		TotalPrice actual = sut.calculate(item);
 		TotalPrice expected = new TotalPrice.Builder().withAmount(new BigDecimal(10)).forCurrency("Euro").build();
@@ -36,7 +36,7 @@ public class ShoppingCartItemCalculatorThreeForTwoTest {
 	@Test
 	public void testCalculate_5() {
 		ShoppingCartItemCalculatorThreeForTwo sut = new ShoppingCartItemCalculatorThreeForTwo();
-		ShoppingCartItem item = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(5).forPricePerPiece(getDummyPrice()).build();
+		ShoppingCartItem item = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(5).build();
 
 		TotalPrice actual = sut.calculate(item);
 		TotalPrice expected = new TotalPrice.Builder().withAmount(new BigDecimal(20)).forCurrency("Euro").build();
@@ -46,7 +46,7 @@ public class ShoppingCartItemCalculatorThreeForTwoTest {
 	@Test
 	public void testCalculate_6() {
 		ShoppingCartItemCalculatorThreeForTwo sut = new ShoppingCartItemCalculatorThreeForTwo();
-		ShoppingCartItem item = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(6).forPricePerPiece(getDummyPrice()).build();
+		ShoppingCartItem item = new ShoppingCartItem.Builder().withArticle(getDummyArticle()).withQuantity(6).build();
 
 		TotalPrice actual = sut.calculate(item);
 		TotalPrice expected = new TotalPrice.Builder().withAmount(new BigDecimal(20)).forCurrency("Euro").build();

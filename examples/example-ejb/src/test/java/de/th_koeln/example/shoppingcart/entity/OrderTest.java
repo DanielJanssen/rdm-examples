@@ -31,7 +31,7 @@ public class OrderTest {
 	}
 
 	private ShoppingCartItem getDummyShoppingCartItem() {
-		return new ShoppingCartItem.Builder().withQuantity(1).withArticle(getDummyArticle()).forPricePerPiece(getDummyPrice()).build();
+		return new ShoppingCartItem.Builder().withQuantity(1).withArticle(getDummyArticle()).build();
 	}
 
 	private Article getDummyArticle() {
