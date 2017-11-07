@@ -17,6 +17,7 @@
 </h:head>
 
 <h:body>
+	<f:view beforePhase="#{shoppingCartPageBean.beforePhase}" />
 	<h:form>
 		<p:growl
 			id="growl"
@@ -101,10 +102,6 @@
 				value="#{shoppingCartAddItemDialogBean.selectedArticle}"
 				label="Article"
 				style="width:250px">
-				<f:ajax
-					execute="@this"
-					render="@this"
-					event="change" />
 				<f:selectItems
 					value="#{shoppingCartAddItemDialogBean.articles}"
 					itemValue="#{entry.id}"
@@ -114,7 +111,7 @@
 			<p:commandButton
 				id="saveButton"
 				value="Save"
-				process="saveButton quantityInput"
+				process="saveButton quantityInput articleDropdown"
 				action="#{shoppingCartAddItemDialogBean.save()}">
 			</p:commandButton>
 			<p:commandButton

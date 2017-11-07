@@ -7,6 +7,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Event;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -38,9 +39,6 @@ public class ShoppingCartPageBean implements Serializable {
 	}
 
 	public List<ShoppingCart> getShoppingCarts() {
-		if (shoppingCarts == null) {
-			init();
-		}
 		return shoppingCarts;
 	}
 
@@ -61,6 +59,12 @@ public class ShoppingCartPageBean implements Serializable {
 
 	public void setSelectedShoppingCart(ShoppingCart aSelectedShoppingCart) {
 		selectedShoppingCart = aSelectedShoppingCart;
+	}
+
+	public void beforePhase(PhaseEvent aEvent) {
+		if (shoppingCarts == null) {
+			init();
+		}
 	}
 
 }
