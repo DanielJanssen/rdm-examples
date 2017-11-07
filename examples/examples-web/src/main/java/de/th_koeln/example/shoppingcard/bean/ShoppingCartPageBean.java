@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import de.th_koeln.example.event.ActionEvent;
+import de.th_koeln.example.shoppingcard.bean.addarticle.AddArticleEvent;
 import de.th_koeln.example.shoppingcard.bean.additem.AddItemEvent;
 import de.th_koeln.example.shoppingcard.bean.additem.FinishAddItemEvent;
 import de.th_koeln.example.shoppingcart.entity.ShoppingCart;
@@ -49,6 +50,10 @@ public class ShoppingCartPageBean implements Serializable {
 			return;
 		}
 		event.fire(new AddItemEvent(selectedShoppingCart.getId()));
+	}
+
+	public void openArticleDialog() {
+		event.fire(new AddArticleEvent());
 	}
 
 	public ShoppingCart getSelectedShoppingCart() {

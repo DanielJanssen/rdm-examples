@@ -80,6 +80,13 @@
 				update="addItemDialog growl"
 				action="#{shoppingCartPageBean.openItemDialog()}">
 			</p:commandButton>
+			<p:commandButton
+				id="addArticleButton"
+				value="Add Article"
+				process="addArticleButton"
+				update="addArticleDialog growl"
+				action="#{shoppingCartPageBean.openArticleDialog()}">
+			</p:commandButton>
 		</p:panel>
 	</h:form>
 
@@ -119,6 +126,25 @@
 				immediate="true"
 				onclick="PF('addItemDialogVar').hide()" />
 		</h:form>
+	</p:dialog>
+
+	<p:dialog
+		id="addArticleDialog"
+		header="Add Article"
+		widgetVar="addArticleDialogVar"
+		modal="true"
+		height="100"
+		closable="false">
+		<p:commandButton
+			id="saveArticleButton"
+			value="Save"
+			process="saveArticleButton"
+			action="#{addArticleDialogBean.save()}">
+		</p:commandButton>
+		<p:commandButton
+			value="Cancel"
+			immediate="true"
+			onclick="PF('addItemDialogVar').hide()" />
 	</p:dialog>
 </h:body>
 </html>
