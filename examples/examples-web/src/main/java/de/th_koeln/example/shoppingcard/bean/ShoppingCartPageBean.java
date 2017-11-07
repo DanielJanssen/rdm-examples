@@ -12,8 +12,6 @@ import javax.faces.event.PhaseEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.primefaces.context.RequestContext;
-
 import de.th_koeln.example.event.ActionEvent;
 import de.th_koeln.example.shoppingcard.bean.additem.AddItemEvent;
 import de.th_koeln.example.shoppingcard.bean.additem.FinishAddItemEvent;
@@ -37,7 +35,6 @@ public class ShoppingCartPageBean implements Serializable {
 
 	public void getAllShoppingCarts(@Observes FinishAddItemEvent anEvent) {
 		shoppingCarts = service.getAllShoppingCarts();
-		RequestContext.getCurrentInstance().execute("PF('addItemDialogVar').hide()");
 	}
 
 	public List<ShoppingCart> getShoppingCarts() {
@@ -52,7 +49,6 @@ public class ShoppingCartPageBean implements Serializable {
 			return;
 		}
 		event.fire(new AddItemEvent(selectedShoppingCart.getId()));
-		RequestContext.getCurrentInstance().execute("PF('addItemDialogVar').show()");
 	}
 
 	public ShoppingCart getSelectedShoppingCart() {

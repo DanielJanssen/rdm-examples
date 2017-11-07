@@ -10,6 +10,8 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.context.RequestContext;
+
 import de.th_koeln.example.event.ActionEvent;
 import de.th_koeln.example.shoppingcart.attribute.ArticleId;
 import de.th_koeln.example.shoppingcart.attribute.Currency;
@@ -24,7 +26,9 @@ import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
 @SessionScoped
 public class ShoppingCartAddItemDialogBean implements Serializable {
 
+	private static final String DIALOG = "addItemDialogVar";
 	private static final long serialVersionUID = 1L;
+
 	private ShoppingCartItem.Builder shoppingCartItem;
 	private List<Article> articles;
 	private String selectedArticle;
@@ -43,6 +47,7 @@ public class ShoppingCartAddItemDialogBean implements Serializable {
 		shoppingCart = shoppingCartService.getShoppingCart(anEvent.getShoppingCartId());
 		shoppingCartItem = new ShoppingCartItem.Builder();
 		articles = articleService.getAllArticles();
+		RequestContext.getCurrentInstance().execute("PF('" + DIALOG + "').show()");
 	}
 
 	public ShoppingCartItem.Builder getShoppingCartItem() {
@@ -67,11 +72,12 @@ public class ShoppingCartAddItemDialogBean implements Serializable {
 		shoppingCartItem.withArticle(articleService.getArticle(ArticleId.fromValue(selectedArticle)));
 
 		//// TODO rt57, 07.11.2017: in den artikel!
-		shoppingCartItem.forPricePerPiece(new PricePerPiece.Builder().forCurrency(Currency.fromValue("Euro")).withAmount(BigDecimal.ONE).build());
+		shoppingCartItem.forPricePerPiece(new PricePerPiece.Builder().forCurrency(Currency.fromValue("EURO")).withAmount(BigDecimal.ONE).build());
 
 		shoppingCart.addItem(shoppingCartItem.build());
 
 		shoppingCart = shoppingCartService.saveShoppingCart(shoppingCart);
 		event.fire(new FinishAddItemEvent());
+		RequestContext.getCurrentInstance().execute("PF('" + DIALOG + "').hide()");
 	}
 }
