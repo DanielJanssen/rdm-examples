@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Event;
+import javax.enterprise.event.Observes;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
@@ -15,6 +16,7 @@ import org.primefaces.context.RequestContext;
 
 import de.th_koeln.example.event.ActionEvent;
 import de.th_koeln.example.shoppingcard.bean.additem.AddItemEvent;
+import de.th_koeln.example.shoppingcard.bean.additem.FinishAddItemEvent;
 import de.th_koeln.example.shoppingcart.entity.ShoppingCart;
 import de.th_koeln.example.shoppingcart.service.ShoppingCartService;
 
@@ -33,9 +35,9 @@ public class ShoppingCartPageBean implements Serializable {
 	@Inject
 	ShoppingCartService service;
 
-	//TODO hier noch eine suchmethode machen ;-) mit refresh
-	public void init() {
+	public void getAllShoppingCarts(@Observes FinishAddItemEvent anEvent) {
 		shoppingCarts = service.getAllShoppingCarts();
+		RequestContext.getCurrentInstance().execute("PF('addItemDialogVar').hide()");
 	}
 
 	public List<ShoppingCart> getShoppingCarts() {
@@ -63,7 +65,7 @@ public class ShoppingCartPageBean implements Serializable {
 
 	public void beforePhase(PhaseEvent aEvent) {
 		if (shoppingCarts == null) {
-			init();
+			getAllShoppingCarts(null);
 		}
 	}
 

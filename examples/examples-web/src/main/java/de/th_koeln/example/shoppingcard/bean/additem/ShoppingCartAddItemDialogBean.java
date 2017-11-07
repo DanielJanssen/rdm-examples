@@ -5,12 +5,12 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.primefaces.context.RequestContext;
-
+import de.th_koeln.example.event.ActionEvent;
 import de.th_koeln.example.shoppingcart.attribute.ArticleId;
 import de.th_koeln.example.shoppingcart.attribute.Currency;
 import de.th_koeln.example.shoppingcart.entity.Article;
@@ -35,6 +35,9 @@ public class ShoppingCartAddItemDialogBean implements Serializable {
 
 	@Inject
 	ShoppingCartService shoppingCartService;
+
+	@Inject
+	Event<ActionEvent> event;
 
 	public void init(@Observes AddItemEvent anEvent) {
 		shoppingCart = shoppingCartService.getShoppingCart(anEvent.getShoppingCartId());
@@ -69,9 +72,6 @@ public class ShoppingCartAddItemDialogBean implements Serializable {
 		shoppingCart.addItem(shoppingCartItem.build());
 
 		shoppingCart = shoppingCartService.saveShoppingCart(shoppingCart);
-		// TODO rt57, 07.11.2017: feuer rückevent für aktualisierung
-
-		RequestContext.getCurrentInstance().execute("PF('addItemDialogVar').hide()");
+		event.fire(new FinishAddItemEvent());
 	}
-
 }
