@@ -133,18 +133,45 @@
 		header="Add Article"
 		widgetVar="addArticleDialogVar"
 		modal="true"
-		height="100"
+		height="200"
 		closable="false">
-		<p:commandButton
-			id="saveArticleButton"
-			value="Save"
-			process="saveArticleButton"
-			action="#{addArticleDialogBean.save()}">
-		</p:commandButton>
-		<p:commandButton
-			value="Cancel"
-			immediate="true"
-			onclick="PF('addItemDialogVar').hide()" />
+		<h:form>
+			<p:inputText
+				id="articleNumberInput"
+				value="#{addArticleDialogBean.article.number}"
+				label="Number"
+				style="width:250px" />
+			<br />
+			<p:inputText
+				id="articleNameInput"
+				value="#{addArticleDialogBean.article.name}"
+				label="Name"
+				style="width:250px" />
+			<br />
+			<p:inputText
+				id="articleDescriptionInput"
+				value="#{addArticleDialogBean.article.description}"
+				label="Description"
+				style="width:250px" />
+			<br />
+			<p:inputText
+				id="articlePricePerPieceInput"
+				value="#{addArticleDialogBean.article.price}"
+				label="Price"
+				style="width:250px" />
+			<br />
+
+			<p:commandButton
+				id="saveArticleButton"
+				value="Save"
+				process="saveArticleButton articleNumberInput articleNameInput articleDescriptionInput articlePricePerPieceInput"
+				action="#{addArticleDialogBean.save()}">
+			</p:commandButton>
+			<p:commandButton
+				value="Cancel"
+				immediate="true"
+				onclick="PF('addArticleDialogVar').hide()" />
+		</h:form>
 	</p:dialog>
 </h:body>
 </html>

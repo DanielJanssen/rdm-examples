@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import de.th_koeln.example.shoppingcart.attribute.ArticleId;
 import de.th_koeln.example.shoppingcart.entity.Article;
+import de.th_koeln.example.shoppingcart.entity.Article.Builder;
 import de.th_koeln.example.shoppingcart.repository.ArticleRepository;
 
 @Stateless
@@ -21,6 +22,10 @@ public class ArticleService {
 
 	public Article getArticle(ArticleId anArticleId) {
 		return articleRepository.getArticle(anArticleId);
+	}
+
+	public void save(Builder anArticle) {
+		articleRepository.save(anArticle.build());
 	}
 
 }

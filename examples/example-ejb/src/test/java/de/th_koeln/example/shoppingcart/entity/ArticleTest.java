@@ -35,7 +35,7 @@ public class ArticleTest {
 
 	@Test()
 	public void testArticleBuilder() {
-		Article actual = new Article.Builder().withNumber(12345).withName("Name").withDescription("Description").forPricePerPiece(getDummyPrice()).build();
+		Article actual = new Article.Builder().withNumber(12345).withName("Name").withDescription("Description").forPrice(getDummyPrice()).build();
 		assertNotNull(actual);
 		assertNotNull(actual.getId());
 		assertEquals(ArticleNumber.fromValue(12345), actual.getNumber());

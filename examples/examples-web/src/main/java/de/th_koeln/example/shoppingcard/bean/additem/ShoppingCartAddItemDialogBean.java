@@ -23,7 +23,7 @@ import de.th_koeln.example.shoppingcart.service.ShoppingCartService;
 @SessionScoped
 public class ShoppingCartAddItemDialogBean implements Serializable {
 
-	private static final String DIALOG = "addItemDialogVar";
+	private static final String DIALOG_ID = "addItemDialogVar";
 	private static final long serialVersionUID = 1L;
 
 	private ShoppingCartItem.Builder shoppingCartItem;
@@ -44,7 +44,7 @@ public class ShoppingCartAddItemDialogBean implements Serializable {
 		shoppingCart = anEvent.getShoppingCartId();
 		shoppingCartItem = new ShoppingCartItem.Builder();
 		articles = articleService.getAllArticles();
-		RequestContext.getCurrentInstance().execute("PF('" + DIALOG + "').show()");
+		RequestContext.getCurrentInstance().execute("PF('" + DIALOG_ID + "').show()");
 	}
 
 	public ShoppingCartItem.Builder getShoppingCartItem() {
@@ -66,6 +66,6 @@ public class ShoppingCartAddItemDialogBean implements Serializable {
 	public void save() {
 		shoppingCartService.addItemToShoppingCart(shoppingCart, shoppingCartItem, articleService.getArticle(ArticleId.fromValue(selectedArticle)));
 		event.fire(new FinishAddItemEvent());
-		RequestContext.getCurrentInstance().execute("PF('" + DIALOG + "').hide()");
+		RequestContext.getCurrentInstance().execute("PF('" + DIALOG_ID + "').hide()");
 	}
 }

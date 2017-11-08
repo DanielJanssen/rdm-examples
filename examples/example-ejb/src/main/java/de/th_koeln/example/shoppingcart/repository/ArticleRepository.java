@@ -26,4 +26,8 @@ public class ArticleRepository {
 	public Article getArticle(ArticleId aArticleId) {
 		return em.find(Article.class, aArticleId);
 	}
+
+	public void save(Article anArticle) {
+		em.merge(anArticle);
+	}
 }

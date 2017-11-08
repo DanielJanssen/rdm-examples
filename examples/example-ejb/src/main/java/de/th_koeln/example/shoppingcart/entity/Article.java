@@ -142,7 +142,7 @@ public class Article {
 			return withDescription(aDescription.getValue());
 		}
 
-		public Builder forPricePerPiece(PricePerPiece aPrice) {
+		public Builder forPrice(PricePerPiece aPrice) {
 			price = new PricePerPiece.Builder().forCurrency(aPrice.getCurrency()).withAmount(aPrice.getAmount()).build();
 			return this;
 		}
