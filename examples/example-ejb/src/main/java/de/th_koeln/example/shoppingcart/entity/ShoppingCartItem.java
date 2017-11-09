@@ -55,6 +55,7 @@ public class ShoppingCartItem {
 
 	public void setShoppingCart(ShoppingCart aShoppingCart) {
 		shoppingCart = aShoppingCart;
+		aShoppingCart.getItems().add(this);
 	}
 
 	public TotalPrice getTotalPrice() {

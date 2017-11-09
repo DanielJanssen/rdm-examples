@@ -60,8 +60,6 @@ public class ShoppingCart {
 				ShoppingCartItem existingItem = getItem(anItem);
 				existingItem.addNumberOfPieces(anItem.getNumberOfPieces());
 			} else {
-				// TODO rt57, 07.11.2017: hmm die rückbeziehung setzen vll woanders?!
-				items.add(anItem);
 				anItem.setShoppingCart(this);
 			}
 		} else {
