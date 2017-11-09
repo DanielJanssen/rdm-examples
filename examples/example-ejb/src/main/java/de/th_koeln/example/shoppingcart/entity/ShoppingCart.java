@@ -134,9 +134,6 @@ public class ShoppingCart {
 		return state.isOrdered();
 	}
 
-	// TODO wirklich die get-methode, dann kann man darauf ja wieder verändern? oder wirklich nur die anwendungsfälle?
-	// oder eine neue liste zurückgeben
-	//protected ist ganz gut für die tests... gucken, was wir später auf der GUI damit machen
 	public List<ShoppingCartItem> getItems() {
 		return items;
 	}

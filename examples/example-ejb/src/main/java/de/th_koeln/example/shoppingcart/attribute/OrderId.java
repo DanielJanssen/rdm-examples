@@ -22,9 +22,6 @@ public class OrderId extends UuidAttribute {
 		super(aQuantity);
 	}
 
-	// TODO ist from value hier wirklich richtig?
-	// einerseits generiert er was zufälliges? lieber .newInstance?
-	// andererseits ist es dann einheitlich
 	public static OrderId fromValue() {
 		return new OrderId(UUID.randomUUID().toString());
 	}
