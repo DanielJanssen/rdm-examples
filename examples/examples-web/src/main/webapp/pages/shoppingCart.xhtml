@@ -6,7 +6,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<style type="text/css">
 .ui-growl {
@@ -77,123 +77,19 @@
 				id="addItemButton"
 				value="Add Item"
 				process="addItemButton shoppingCartTable"
-				update="addItemDialog growl"
+				update="growl"
 				action="#{shoppingCartPageBean.openItemDialog()}">
 			</p:commandButton>
 			<p:commandButton
 				id="addArticleButton"
 				value="Add Article"
 				process="addArticleButton"
-				update="addArticleDialog growl"
+				update="growl"
 				action="#{shoppingCartPageBean.openArticleDialog()}">
 			</p:commandButton>
 		</p:panel>
 	</h:form>
-
-	<p:dialog
-		id="addItemDialog"
-		header="Add Items"
-		widgetVar="addItemDialogVar"
-		modal="true"
-		height="200"
-		closable="false">
-		<h:form>
-			<h:panelGrid
-				columns="2"
-				style="margin-bottom:10px"
-				cellpadding="5">
-				<p:outputLabel
-					for="quantityInput"
-					value="Quantity" />
-				<p:inputText
-					id="quantityInput"
-					value="#{shoppingCartAddItemDialogBean.shoppingCartItem.quantity}"
-					style="width:250px" />
-				<p:outputLabel
-					for="articleDropdown"
-					value="Article" />
-				<p:selectOneMenu
-					id="articleDropdown"
-					value="#{shoppingCartAddItemDialogBean.selectedArticle}"
-					label="Article"
-					style="width:250px">
-					<f:selectItems
-						value="#{shoppingCartAddItemDialogBean.articles}"
-						itemValue="#{entry.id}"
-						var="entry" />
-				</p:selectOneMenu>
-			</h:panelGrid>
-			<br />
-			<p:commandButton
-				id="saveButton"
-				value="Save"
-				process="saveButton quantityInput articleDropdown"
-				action="#{shoppingCartAddItemDialogBean.save()}">
-			</p:commandButton>
-			<p:commandButton
-				value="Cancel"
-				immediate="true"
-				onclick="PF('addItemDialogVar').hide()" />
-		</h:form>
-	</p:dialog>
-
-	<p:dialog
-		id="addArticleDialog"
-		header="Add Article"
-		widgetVar="addArticleDialogVar"
-		modal="true"
-		height="300"
-		closable="false">
-		<h:form>
-			<h:panelGrid
-				columns="2"
-				style="margin-bottom:10px"
-				cellpadding="5">
-				<p:outputLabel
-					for="articleNumberInput"
-					value="Number" />
-				<p:inputText
-					id="articleNumberInput"
-					value="#{addArticleDialogBean.article.number}"
-					label="Number"
-					style="width:250px" />
-				<p:outputLabel
-					for="articleNameInput"
-					value="Name" />
-				<p:inputText
-					id="articleNameInput"
-					value="#{addArticleDialogBean.article.name}"
-					label="Name"
-					style="width:250px" />
-				<p:outputLabel
-					for="articleDescriptionInput"
-					value="Description" />
-				<p:inputText
-					id="articleDescriptionInput"
-					value="#{addArticleDialogBean.article.description}"
-					label="Description"
-					style="width:250px" />
-				<p:outputLabel
-					for="articlePricePerPieceInput"
-					value="Price Per Piece" />
-				<p:inputText
-					id="articlePricePerPieceInput"
-					value="#{addArticleDialogBean.article.price}"
-					label="Price"
-					style="width:250px" />
-			</h:panelGrid>
-			<br />
-			<p:commandButton
-				id="saveArticleButton"
-				value="Save"
-				process="saveArticleButton articleNumberInput articleNameInput articleDescriptionInput articlePricePerPieceInput"
-				action="#{addArticleDialogBean.save()}">
-			</p:commandButton>
-			<p:commandButton
-				value="Cancel"
-				immediate="true"
-				onclick="PF('addArticleDialogVar').hide()" />
-		</h:form>
-	</p:dialog>
+	<ui:include src="/includes/addItemDialog.xhtml" />
+	<ui:include src="/includes/addArticleDialog.xhtml" />
 </h:body>
 </html>
