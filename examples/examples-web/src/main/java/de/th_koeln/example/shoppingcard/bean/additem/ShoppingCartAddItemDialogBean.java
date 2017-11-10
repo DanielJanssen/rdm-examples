@@ -27,9 +27,10 @@ public class ShoppingCartAddItemDialogBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private ShoppingCartItem.Builder shoppingCartItem;
+	//// TODO rt57, 10.11.2017: vll Articles als klasse, die die list-implementierung hat oder nicht
 	private List<Article> articles;
-	private String selectedArticle;
-	private ShoppingCartId shoppingCart;
+	private ArticleId selectedArticleId;
+	private ShoppingCartId shoppingCartId;
 
 	@Inject
 	ArticleService articleService;
@@ -41,10 +42,27 @@ public class ShoppingCartAddItemDialogBean implements Serializable {
 	Event<ActionEvent> event;
 
 	public void init(@Observes AddItemEvent anEvent) {
-		shoppingCart = anEvent.getShoppingCartId();
+		shoppingCartId = anEvent.getShoppingCartId();
 		shoppingCartItem = new ShoppingCartItem.Builder();
 		articles = articleService.getAllArticles();
 		RequestContext.getCurrentInstance().execute("PF('" + DIALOG_ID + "').show()");
+	}
+
+	public void save() {
+		shoppingCartItem.withArticle(determineSelectedArticle());
+
+		shoppingCartService.addItemToShoppingCart(shoppingCartId, shoppingCartItem.build());
+		event.fire(new FinishAddItemEvent());
+		RequestContext.getCurrentInstance().execute("PF('" + DIALOG_ID + "').hide()");
+	}
+
+	private Article determineSelectedArticle() {
+		for (Article article : articles) {
+			if (article.getId().equalsValue(selectedArticleId)) {
+				return article;
+			}
+		}
+		throw new IllegalStateException("Article not found");
 	}
 
 	public ShoppingCartItem.Builder getShoppingCartItem() {
@@ -55,17 +73,12 @@ public class ShoppingCartAddItemDialogBean implements Serializable {
 		return articles;
 	}
 
-	public String getSelectedArticle() {
-		return selectedArticle;
+	public ArticleId getSelectedArticleId() {
+		return selectedArticleId;
 	}
 
-	public void setSelectedArticle(String aSelectedArticle) {
-		selectedArticle = aSelectedArticle;
+	public void setSelectedArticleId(ArticleId aSelectedArticle) {
+		selectedArticleId = aSelectedArticle;
 	}
 
-	public void save() {
-		shoppingCartService.addItemToShoppingCart(shoppingCart, shoppingCartItem, articleService.getArticle(ArticleId.fromValue(selectedArticle)));
-		event.fire(new FinishAddItemEvent());
-		RequestContext.getCurrentInstance().execute("PF('" + DIALOG_ID + "').hide()");
-	}
 }

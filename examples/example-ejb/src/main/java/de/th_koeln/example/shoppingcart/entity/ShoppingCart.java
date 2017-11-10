@@ -52,8 +52,6 @@ public class ShoppingCart {
 		discountType = aBuilder.geDiscountShoppingCartType();
 	}
 
-	//was ist wenn sich der price des Artikels geändert hat?
-	// TODO rt57, 13.10.2017: gleiche currency?
 	public void addItem(ShoppingCartItem anItem) {
 		if (!isOrdered()) {
 			if (containsItem(anItem)) {
