@@ -9,14 +9,9 @@
 	</context-param>
 
 	<servlet>
-		<servlet-name>Start Servlet</servlet-name>
-		<servlet-class>de.th_koeln.example.servlet.StartServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-		<load-on-startup>2</load-on-startup>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
