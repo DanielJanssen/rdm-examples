@@ -4,12 +4,14 @@ import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Observes;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.context.RequestContext;
 
 import de.th_koeln.example.shoppingcard.bean.addarticle.Articles;
 import de.th_koeln.example.shoppingcart.service.article.ArticleSearchVo;
+import de.th_koeln.example.shoppingcart.service.article.ArticleService;
 
 @Named
 @SessionScoped
@@ -21,9 +23,11 @@ public class SearchArticleDialogBean implements Serializable {
 	ArticleSearchVo searchVo;
 	Articles result;
 
+	@Inject
+	ArticleService articleService;
+
 	public void init(@Observes SearchArticleEvent anEvent) {
 		searchVo = new ArticleSearchVo();
-		//		result = new Articles(new ArrayList<Articles>());
 		RequestContext.getCurrentInstance().execute("PF('" + DIALOG_ID + "').show()");
 	}
 
@@ -31,12 +35,8 @@ public class SearchArticleDialogBean implements Serializable {
 		RequestContext.getCurrentInstance().execute("PF('" + DIALOG_ID + "').hide()");
 	}
 
-	public void searchNativeArticles() {
-
-	}
-
-	public void searchQueryDslArticles() {
-
+	public void searchArticles() {
+		result = new Articles(articleService.getArticles(searchVo));
 	}
 
 	public ArticleSearchVo getSearchVo() {

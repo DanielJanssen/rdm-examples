@@ -28,4 +28,8 @@ public class ArticleService {
 		articleRepository.save(anArticle.build());
 	}
 
+	public List<Article> getArticles(ArticleSearchVo aSearchVo) {
+		return articleRepository.getArticle(aSearchVo);
+	}
+
 }

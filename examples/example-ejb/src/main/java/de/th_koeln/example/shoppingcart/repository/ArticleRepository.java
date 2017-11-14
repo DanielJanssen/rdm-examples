@@ -6,11 +6,14 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.mysema.query.BooleanBuilder;
 import com.mysema.query.jpa.impl.JPAQuery;
 
 import de.th_koeln.example.shoppingcart.attribute.ArticleId;
+import de.th_koeln.example.shoppingcart.attribute.ArticleName;
 import de.th_koeln.example.shoppingcart.entity.Article;
 import de.th_koeln.example.shoppingcart.entity.QArticle;
+import de.th_koeln.example.shoppingcart.service.article.ArticleSearchVo;
 
 @Stateless
 public class ArticleRepository {
@@ -29,5 +32,17 @@ public class ArticleRepository {
 
 	public void save(Article anArticle) {
 		em.merge(anArticle);
+	}
+
+	public List<Article> getArticle(ArticleSearchVo aSearchVo) {
+		BooleanBuilder tempConditions = new BooleanBuilder();
+		addArticleName(aSearchVo.getArticleName(), tempConditions);
+		return new JPAQuery(em).from(ARTICLE).where(tempConditions).list(ARTICLE);
+	}
+
+	private void addArticleName(ArticleName articleName, BooleanBuilder tempConditions) {
+		if (articleName != null && !articleName.isNullOrEmpty()) {
+			tempConditions.and(ARTICLE.name.eq(articleName));
+		}
 	}
 }
