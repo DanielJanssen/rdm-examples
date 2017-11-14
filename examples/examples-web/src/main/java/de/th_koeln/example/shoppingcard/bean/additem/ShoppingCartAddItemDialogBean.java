@@ -15,8 +15,8 @@ import de.th_koeln.example.shoppingcard.bean.addarticle.Articles;
 import de.th_koeln.example.shoppingcart.attribute.ArticleId;
 import de.th_koeln.example.shoppingcart.attribute.ShoppingCartId;
 import de.th_koeln.example.shoppingcart.entity.ShoppingCartItem;
-import de.th_koeln.example.shoppingcart.service.ArticleService;
-import de.th_koeln.example.shoppingcart.service.ShoppingCartService;
+import de.th_koeln.example.shoppingcart.service.article.ArticleService;
+import de.th_koeln.example.shoppingcart.service.shoppingcart.ShoppingCartService;
 
 @Named
 @SessionScoped

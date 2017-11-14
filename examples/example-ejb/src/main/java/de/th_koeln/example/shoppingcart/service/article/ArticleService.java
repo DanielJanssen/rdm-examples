@@ -1,4 +1,4 @@
-package de.th_koeln.example.shoppingcart.service;
+package de.th_koeln.example.shoppingcart.service.article;
 
 import java.util.List;
 

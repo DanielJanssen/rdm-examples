@@ -1,4 +1,4 @@
-package de.th_koeln.example.shoppingcart.service;
+package de.th_koeln.example.shoppingcart.service.shoppingcart;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import de.th_koeln.example.shoppingcart.attribute.ShoppingCartId;
 import de.th_koeln.example.shoppingcart.entity.ShoppingCart;
 import de.th_koeln.example.shoppingcart.entity.ShoppingCartItem;
 import de.th_koeln.example.shoppingcart.repository.ShoppingCartRepository;
+import de.th_koeln.example.shoppingcart.service.article.ArticleService;
 
 @Stateless
 public class ShoppingCartService {

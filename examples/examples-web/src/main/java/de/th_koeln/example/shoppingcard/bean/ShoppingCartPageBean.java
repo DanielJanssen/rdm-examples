@@ -16,8 +16,9 @@ import de.th_koeln.example.event.ActionEvent;
 import de.th_koeln.example.shoppingcard.bean.addarticle.AddArticleEvent;
 import de.th_koeln.example.shoppingcard.bean.additem.AddItemEvent;
 import de.th_koeln.example.shoppingcard.bean.additem.FinishAddItemEvent;
+import de.th_koeln.example.shoppingcard.bean.searcharticle.SearchArticleEvent;
 import de.th_koeln.example.shoppingcart.entity.ShoppingCart;
-import de.th_koeln.example.shoppingcart.service.ShoppingCartService;
+import de.th_koeln.example.shoppingcart.service.shoppingcart.ShoppingCartService;
 
 @Named
 @SessionScoped
@@ -54,6 +55,10 @@ public class ShoppingCartPageBean implements Serializable {
 
 	public void openArticleDialog() {
 		event.fire(new AddArticleEvent());
+	}
+
+	public void searchArticle() {
+		event.fire(new SearchArticleEvent());
 	}
 
 	public ShoppingCart getSelectedShoppingCart() {

@@ -1,0 +1,62 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<p:dialog
+		id="searchArticleDialog"
+		header="Search Article"
+		widgetVar="searchArticleDialogVar"
+		modal="true"
+		height="300"
+		closable="false">
+		<h:form>
+			<h:panelGrid
+				columns="2"
+				style="margin-bottom:10px"
+				cellpadding="5">
+				<p:outputLabel
+					for="articleNameInput"
+					value="Name" />
+				<p:inputText
+					id="articleNameInput"
+					value="#{searchArticleDialogBean.searchVo.articleName}"
+					label="Name"
+					style="width:250px" />
+				<p:commandButton
+					id="searchNativeArticleButton"
+					value="Search Native Article"
+					process="searchNativeArticleButton articleNameInput"
+					action="#{searchArticleDialogBean.searchNativeArticles()}" />
+				<p:commandButton
+					id="searchQueryDslArticleButton"
+					value="Search QueryDsl Article"
+					process="searchQueryDslArticleButton articleNameInput"
+					action="#{searchArticleDialogBean.searchNativeArticles()}" />
+			</h:panelGrid>
+			<p:dataTable
+				value="#{searchArticleDialogBean.result.value}"
+				var="entry"
+				editable="false">
+				<p:column headerText="Article Number">
+					<h:outputText value="#{entry.number}" />
+				</p:column>
+				<p:column headerText="Article Name">
+					<h:outputText value="#{entry.name}" />
+				</p:column>
+				<p:column headerText="Article Description">
+					<h:outputText value="#{entry.description}" />
+				</p:column>
+				<p:column headerText="Price Per Piece">
+					<h:outputText value="#{entry.price}" />
+				</p:column>
+			</p:dataTable>
+			<p:commandButton
+				id="closeButton"
+				value="Close"
+				process="closeButton"
+				action="#{searchArticleDialogBean.searchNativeArticles()}" />
+		</h:form>
+	</p:dialog>
+</ui:composition>

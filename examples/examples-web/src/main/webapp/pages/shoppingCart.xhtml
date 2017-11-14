@@ -85,11 +85,17 @@
 				value="Add Article"
 				process="addArticleButton"
 				update="growl addArticleDialog"
-				action="#{shoppingCartPageBean.openArticleDialog()}">
-			</p:commandButton>
+				action="#{shoppingCartPageBean.openArticleDialog()}" />
+			<p:commandButton
+				id="searchArticleButton"
+				value="Search Article"
+				process="searchArticleButton"
+				update="growl searchArticleDialog"
+				action="#{shoppingCartPageBean.searchArticle()}" />
 		</p:panel>
 	</h:form>
 	<ui:include src="/includes/addItemDialog.xhtml" />
 	<ui:include src="/includes/addArticleDialog.xhtml" />
+	<ui:include src="/includes/searchArticle.xhtml" />
 </h:body>
 </html>
