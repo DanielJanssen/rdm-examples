@@ -20,7 +20,7 @@ public class Articles {
 
 	public Article getArticleFor(ArticleId selectedArticleId) {
 		for (Article article : value) {
-			if (article.getId().equalsValue(selectedArticleId)) {
+			if (article.getId().isEqualsThan(selectedArticleId)) {
 				return article;
 			}
 		}

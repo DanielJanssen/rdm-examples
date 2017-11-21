@@ -82,7 +82,8 @@ public class ShoppingCart {
 		if (!isOrdered()) {
 			if (containsItem(anItem)) {
 				ShoppingCartItem reducableItem = getItem(anItem);
-				if (aReducableNumberOfPieces.isGreaterThan(reducableItem.getNumberOfPieces()) || aReducableNumberOfPieces.equals(anItem.getNumberOfPieces())) {
+				if (aReducableNumberOfPieces.isGreaterThan(reducableItem.getNumberOfPieces())
+						|| aReducableNumberOfPieces.isEqualsThan(anItem.getNumberOfPieces())) {
 					removeItem(reducableItem);
 				} else {
 					reducableItem.reduceNumberOfPieces(aReducableNumberOfPieces);
