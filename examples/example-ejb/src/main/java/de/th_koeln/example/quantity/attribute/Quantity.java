@@ -1,24 +1,27 @@
 package de.th_koeln.example.quantity.attribute;
 
-import de.th_koeln.rdm.attribute.IntegerAttribute;
+import de.th_koeln.rdm.attribute.ShortAttribute;
 
-public class Quantity extends IntegerAttribute {
+public class Quantity extends ShortAttribute {
 
 	private static final long serialVersionUID = 1L;
 
-	private Quantity(Integer aQuantity) {
+	private Quantity(Short aQuantity) {
 		super(aQuantity);
 	}
 
 	@Override
-	protected Boolean isValid(Integer aValue) {
+	protected Boolean isValid(Short aValue) {
 		if (aValue < 0) {
-			return false;
+			return Boolean.FALSE;
 		}
-		return true;
+		if (aValue > 1000) {
+			return Boolean.FALSE;
+		}
+		return Boolean.TRUE;
 	}
 
-	public static Quantity fromValue(Integer aQuantity) {
+	public static Quantity fromValue(Short aQuantity) {
 		return new Quantity(aQuantity);
 	}
 

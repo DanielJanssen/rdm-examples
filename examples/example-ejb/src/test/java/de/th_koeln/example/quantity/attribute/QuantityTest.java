@@ -8,19 +8,25 @@ public class QuantityTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFromValueIsBelowZero() {
-		Quantity.fromValue(-1);
+		Quantity.fromValue((short) -1);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFromValueIsGreaterMaximum() {
+		Quantity.fromValue((short) 1001);
 	}
 
 	@Test
 	public void testFromValueIsZero() {
-		Quantity actual = Quantity.fromValue(0);
-		assertEquals(Integer.valueOf(0), actual.getValue());
+		Quantity actual = Quantity.fromValue((short) 0);
+		assertEquals(Short.valueOf((short) 0), actual.getValue());
 	}
 
 	@Test
 	public void testFromValueIsGreaterThanZero() {
-		Quantity actual = Quantity.fromValue(1);
-		assertEquals(Integer.valueOf(1), actual.getValue());
-	}
 
+		Quantity actual = Quantity.fromValue((short) 1);
+
+		assertEquals(Short.valueOf((short) 1), actual.getValue());
+	}
 }
