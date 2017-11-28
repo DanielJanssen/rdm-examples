@@ -1,4 +1,4 @@
-package de.th_koeln.example.shoppingcart.enums.domain.converter;
+package de.th_koeln.example.shoppingcart.domain.enums.converter;
 
 import javax.persistence.AttributeConverter;
 

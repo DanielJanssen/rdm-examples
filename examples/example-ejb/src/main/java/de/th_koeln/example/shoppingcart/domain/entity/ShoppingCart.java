@@ -17,9 +17,9 @@ import de.th_koeln.example.shoppingcart.domain.attribute.Quantity;
 import de.th_koeln.example.shoppingcart.domain.attribute.ShoppingCartId;
 import de.th_koeln.example.shoppingcart.domain.enums.DiscountShoppingCartType;
 import de.th_koeln.example.shoppingcart.domain.enums.OrderState;
+import de.th_koeln.example.shoppingcart.domain.enums.converter.DiscountShoppingCartTypeConverter;
+import de.th_koeln.example.shoppingcart.domain.enums.converter.OrderStateConverter;
 import de.th_koeln.example.shoppingcart.domain.vo.TotalPrice;
-import de.th_koeln.example.shoppingcart.enums.domain.converter.DiscountShoppingCartTypeConverter;
-import de.th_koeln.example.shoppingcart.enums.domain.converter.OrderStateConverter;
 
 @Entity
 public class ShoppingCart {

@@ -11,9 +11,9 @@ import javax.persistence.ManyToOne;
 import de.th_koeln.example.shoppingcart.domain.attribute.Quantity;
 import de.th_koeln.example.shoppingcart.domain.attribute.ShoppingCartItemId;
 import de.th_koeln.example.shoppingcart.domain.enums.DiscountShoppingCartItemType;
+import de.th_koeln.example.shoppingcart.domain.enums.converter.DiscountShoppingCartItemTypeConverter;
 import de.th_koeln.example.shoppingcart.domain.vo.PricePerPiece;
 import de.th_koeln.example.shoppingcart.domain.vo.TotalPrice;
-import de.th_koeln.example.shoppingcart.enums.domain.converter.DiscountShoppingCartItemTypeConverter;
 
 @Entity
 public class ShoppingCartItem {
