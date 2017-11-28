@@ -4,25 +4,25 @@
 	<persistence-unit name="examples-ejb" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>jboss/DataSource/mysqlrdm</jta-data-source>
-		<class>de.th_koeln.example.shoppingcart.attribute.Amount</class>
-		<class>de.th_koeln.example.shoppingcart.attribute.ArticleDescription</class>
-		<class>de.th_koeln.example.shoppingcart.attribute.ArticleId</class>
-		<class>de.th_koeln.example.shoppingcart.attribute.ArticleName</class>
-		<class>de.th_koeln.example.shoppingcart.attribute.ArticleNumber</class>
-		<class>de.th_koeln.example.shoppingcart.attribute.Currency</class>
-		<class>de.th_koeln.example.shoppingcart.attribute.OrderDate</class>
-		<class>de.th_koeln.example.shoppingcart.attribute.OrderId</class>
-		<class>de.th_koeln.example.shoppingcart.attribute.Quantity</class>
-		<class>de.th_koeln.example.shoppingcart.attribute.ShoppingCartId</class>
-		<class>de.th_koeln.example.shoppingcart.attribute.ShoppingCartItemId</class>
-		<class>de.th_koeln.example.shoppingcart.attribute.UserAccountId</class>
-		<class>de.th_koeln.example.shoppingcart.entity.Article</class>
-		<class>de.th_koeln.example.shoppingcart.entity.Order</class>
-		<class>de.th_koeln.example.shoppingcart.entity.ShoppingCart</class>
-		<class>de.th_koeln.example.shoppingcart.entity.ShoppingCartItem</class>
-		<class>de.th_koeln.example.shoppingcart.entity.UserAccount</class>
-		<class>de.th_koeln.example.shoppingcart.vo.PricePerPiece</class>
-		<class>de.th_koeln.example.shoppingcart.vo.TotalPrice</class>
+		<class>de.th_koeln.example.shoppingcart.domain.attribute.Amount</class>
+		<class>de.th_koeln.example.shoppingcart.domain.attribute.ArticleDescription</class>
+		<class>de.th_koeln.example.shoppingcart.domain.attribute.ArticleId</class>
+		<class>de.th_koeln.example.shoppingcart.domain.attribute.ArticleName</class>
+		<class>de.th_koeln.example.shoppingcart.domain.attribute.ArticleNumber</class>
+		<class>de.th_koeln.example.shoppingcart.domain.attribute.Currency</class>
+		<class>de.th_koeln.example.shoppingcart.domain.attribute.OrderDate</class>
+		<class>de.th_koeln.example.shoppingcart.domain.attribute.OrderId</class>
+		<class>de.th_koeln.example.shoppingcart.domain.attribute.Quantity</class>
+		<class>de.th_koeln.example.shoppingcart.domain.attribute.ShoppingCartId</class>
+		<class>de.th_koeln.example.shoppingcart.domain.attribute.ShoppingCartItemId</class>
+		<class>de.th_koeln.example.shoppingcart.domain.attribute.UserAccountId</class>
+		<class>de.th_koeln.example.shoppingcart.domain.entity.Article</class>
+		<class>de.th_koeln.example.shoppingcart.domain.entity.Order</class>
+		<class>de.th_koeln.example.shoppingcart.domain.entity.ShoppingCart</class>
+		<class>de.th_koeln.example.shoppingcart.domain.entity.ShoppingCartItem</class>
+		<class>de.th_koeln.example.shoppingcart.domain.entity.UserAccount</class>
+		<class>de.th_koeln.example.shoppingcart.domain.vo.PricePerPiece</class>
+		<class>de.th_koeln.example.shoppingcart.domain.vo.TotalPrice</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.show_sql" value="true" />

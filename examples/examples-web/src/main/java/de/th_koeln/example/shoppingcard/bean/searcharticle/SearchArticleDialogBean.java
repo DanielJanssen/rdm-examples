@@ -10,8 +10,8 @@ import javax.inject.Named;
 import org.primefaces.context.RequestContext;
 
 import de.th_koeln.example.shoppingcard.bean.addarticle.Articles;
-import de.th_koeln.example.shoppingcart.service.article.ArticleSearchVo;
-import de.th_koeln.example.shoppingcart.service.article.ArticleService;
+import de.th_koeln.example.shoppingcart.application.service.article.ArticleSearchVo;
+import de.th_koeln.example.shoppingcart.application.service.article.ArticleService;
 
 @Named
 @SessionScoped

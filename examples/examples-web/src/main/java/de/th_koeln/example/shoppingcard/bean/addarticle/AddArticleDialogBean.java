@@ -9,8 +9,8 @@ import javax.inject.Named;
 
 import org.primefaces.context.RequestContext;
 
-import de.th_koeln.example.shoppingcart.entity.Article;
-import de.th_koeln.example.shoppingcart.service.article.ArticleService;
+import de.th_koeln.example.shoppingcart.application.service.article.ArticleService;
+import de.th_koeln.example.shoppingcart.domain.entity.Article;
 
 @Named
 @SessionScoped

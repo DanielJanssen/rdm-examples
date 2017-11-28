@@ -7,8 +7,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import de.th_koeln.example.shoppingcart.attribute.Amount;
-import de.th_koeln.example.shoppingcart.vo.PricePerPiece;
+import de.th_koeln.example.shoppingcart.domain.attribute.Amount;
+import de.th_koeln.example.shoppingcart.domain.vo.PricePerPiece;
 
 @FacesConverter(forClass = PricePerPiece.class)
 public class PricePerPieceConverter implements Converter {

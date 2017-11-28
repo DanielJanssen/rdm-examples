@@ -1,7 +1,7 @@
 package de.th_koeln.example.shoppingcard.bean.additem;
 
 import de.th_koeln.example.event.ActionEvent;
-import de.th_koeln.example.shoppingcart.attribute.ShoppingCartId;
+import de.th_koeln.example.shoppingcart.domain.attribute.ShoppingCartId;
 
 public class AddItemEvent implements ActionEvent {
 

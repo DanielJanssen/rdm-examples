@@ -2,8 +2,8 @@ package de.th_koeln.example.shoppingcard.bean.addarticle;
 
 import java.util.List;
 
-import de.th_koeln.example.shoppingcart.attribute.ArticleId;
-import de.th_koeln.example.shoppingcart.entity.Article;
+import de.th_koeln.example.shoppingcart.domain.attribute.ArticleId;
+import de.th_koeln.example.shoppingcart.domain.entity.Article;
 
 public class Articles {
 

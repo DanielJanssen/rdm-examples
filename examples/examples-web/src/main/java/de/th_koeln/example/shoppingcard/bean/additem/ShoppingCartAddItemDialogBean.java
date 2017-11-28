@@ -12,11 +12,11 @@ import org.primefaces.context.RequestContext;
 
 import de.th_koeln.example.event.ActionEvent;
 import de.th_koeln.example.shoppingcard.bean.addarticle.Articles;
-import de.th_koeln.example.shoppingcart.attribute.ArticleId;
-import de.th_koeln.example.shoppingcart.attribute.ShoppingCartId;
-import de.th_koeln.example.shoppingcart.entity.ShoppingCartItem;
-import de.th_koeln.example.shoppingcart.service.article.ArticleService;
-import de.th_koeln.example.shoppingcart.service.shoppingcart.ShoppingCartService;
+import de.th_koeln.example.shoppingcart.application.service.article.ArticleService;
+import de.th_koeln.example.shoppingcart.application.service.shoppingcart.ShoppingCartService;
+import de.th_koeln.example.shoppingcart.domain.attribute.ArticleId;
+import de.th_koeln.example.shoppingcart.domain.attribute.ShoppingCartId;
+import de.th_koeln.example.shoppingcart.domain.entity.ShoppingCartItem;
 
 @Named
 @SessionScoped

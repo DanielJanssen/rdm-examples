@@ -17,8 +17,8 @@ import de.th_koeln.example.shoppingcard.bean.addarticle.AddArticleEvent;
 import de.th_koeln.example.shoppingcard.bean.additem.AddItemEvent;
 import de.th_koeln.example.shoppingcard.bean.additem.FinishAddItemEvent;
 import de.th_koeln.example.shoppingcard.bean.searcharticle.SearchArticleEvent;
-import de.th_koeln.example.shoppingcart.entity.ShoppingCart;
-import de.th_koeln.example.shoppingcart.service.shoppingcart.ShoppingCartService;
+import de.th_koeln.example.shoppingcart.application.service.shoppingcart.ShoppingCartService;
+import de.th_koeln.example.shoppingcart.domain.entity.ShoppingCart;
 
 @Named
 @SessionScoped
