@@ -12,10 +12,21 @@ public class Quantity extends IntegerAttribute {
 
 	private static final long serialVersionUID = 1L;
 
-	protected Quantity() { //needed for JPA
+	/*
+	 * @deprecated
+	 * Use fromValue()
+	 * JPA needs an protected/public non argument constructor
+	 */
+	@Deprecated
+	protected Quantity() {
 		super();
 	}
 
+	/*
+	 * @deprecated
+	 * Use fromValue()-method
+	 */
+	@Deprecated
 	private Quantity(Integer aQuantity) {
 		super(aQuantity);
 	}

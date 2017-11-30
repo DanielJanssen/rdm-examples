@@ -14,10 +14,19 @@ public class UserAccountId extends UuidAttribute {
 
 	private static final long serialVersionUID = 1L;
 
-	public UserAccountId() { //needed for JPA
+	/*
+	 * @deprecated
+	 * Use fromValue()
+	 * JPA needs an protected/public non argument constructor
+	 */
+	public UserAccountId() {
 		super();
 	}
 
+	/*
+	 * @deprecated
+	 * Use fromValue()-method
+	 */
 	private UserAccountId(String aQuantity) {
 		super(aQuantity);
 	}

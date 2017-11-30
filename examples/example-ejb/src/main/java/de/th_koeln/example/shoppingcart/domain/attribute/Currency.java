@@ -12,10 +12,19 @@ public class Currency extends StringAttribute {
 
 	private static final long serialVersionUID = 1L;
 
-	protected Currency() { //needed for JPA
+	/*
+	 * @deprecated
+	 * Use fromValue()
+	 * JPA needs an protected/public non argument constructor
+	 */
+	protected Currency() {
 		super();
 	}
 
+	/*
+	 * @deprecated
+	 * Use fromValue()-method
+	 */
 	private Currency(String aValue) {
 		super(aValue);
 	}

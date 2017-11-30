@@ -14,10 +14,19 @@ public class OrderDate extends DateAttribute {
 
 	private static final long serialVersionUID = 1L;
 
-	protected OrderDate() { //needed for JPA
+	/*
+	 * @deprecated
+	 * Use fromValue()
+	 * JPA needs an protected/public non argument constructor
+	 */
+	protected OrderDate() {
 		super();
 	}
 
+	/*
+	 * @deprecated
+	 * Use fromValue()-method
+	 */
 	private OrderDate(Date aValue) {
 		super(aValue);
 	}

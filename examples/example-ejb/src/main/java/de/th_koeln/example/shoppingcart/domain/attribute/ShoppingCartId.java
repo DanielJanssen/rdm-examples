@@ -14,17 +14,23 @@ public class ShoppingCartId extends UuidAttribute {
 
 	private static final long serialVersionUID = 1L;
 
-	public ShoppingCartId() { //needed for JPA
+	/*
+	 * @deprecated
+	 * Use fromValue()
+	 * JPA needs an protected/public non argument constructor
+	 */
+	public ShoppingCartId() {
 		super();
 	}
 
+	/*
+	 * @deprecated
+	 * Use fromValue()-method
+	 */
 	private ShoppingCartId(String aQuantity) {
 		super(aQuantity);
 	}
 
-	//ist from value hier wirklich richtig?
-	// einerseits generiert er was zufälliges? lieber .newInstance?
-	// andererseits ist es dann einheitlich
 	public static ShoppingCartId fromValue() {
 		return new ShoppingCartId(UUID.randomUUID().toString());
 	}

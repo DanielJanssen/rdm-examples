@@ -14,10 +14,19 @@ public class OrderId extends UuidAttribute {
 
 	private static final long serialVersionUID = 1L;
 
-	public OrderId() { //needed for JPA
+	/*
+	 * @deprecated
+	 * Use fromValue()
+	 * JPA needs an protected/public non argument constructor
+	 */
+	public OrderId() {
 		super();
 	}
 
+	/*
+	 * @deprecated
+	 * Use fromValue()-method
+	 */
 	private OrderId(String aQuantity) {
 		super(aQuantity);
 	}

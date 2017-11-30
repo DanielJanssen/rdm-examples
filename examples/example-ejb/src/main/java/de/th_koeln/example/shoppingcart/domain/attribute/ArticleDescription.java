@@ -12,10 +12,19 @@ public class ArticleDescription extends StringAttribute {
 
 	private static final long serialVersionUID = 1L;
 
-	protected ArticleDescription() { //needed for JPA
+	/*
+	 * @deprecated
+	 * Use fromValue()
+	 * JPA needs an protected/public non argument constructor
+	 */
+	protected ArticleDescription() {
 		super();
 	}
 
+	/*
+	 * @deprecated
+	 * Use fromValue()-method
+	 */
 	private ArticleDescription(String aValue) {
 		super(aValue);
 	}

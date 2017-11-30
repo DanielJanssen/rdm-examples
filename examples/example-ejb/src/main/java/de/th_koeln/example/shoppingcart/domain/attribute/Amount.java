@@ -15,10 +15,19 @@ public class Amount extends BigDecimalAttribute {
 
 	private static final long serialVersionUID = 1L;
 
-	protected Amount() { //needed for JPA
+	/*
+	 * @deprecated
+	 * Use fromValue()
+	 * JPA needs an protected/public non argument constructor
+	 */
+	protected Amount() {
 		super();
 	}
 
+	/*
+	 * @deprecated
+	 * Use fromValue()-method
+	 */
 	private Amount(BigDecimal aValue) {
 		super(aValue);
 	}

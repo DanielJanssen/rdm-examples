@@ -12,10 +12,19 @@ public class ArticleNumber extends IntegerAttribute {
 
 	private static final long serialVersionUID = 1L;
 
-	protected ArticleNumber() { //needed for JPA
+	/*
+	 * @deprecated
+	 * Use fromValue()
+	 * JPA needs an protected/public non argument constructor
+	 */
+	protected ArticleNumber() {
 		super();
 	}
 
+	/*
+	 * @deprecated
+	 * Use fromValue()-method
+	 */
 	private ArticleNumber(Integer aQuantity) {
 		super(aQuantity);
 	}
