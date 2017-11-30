@@ -19,6 +19,7 @@ public class OrderDate extends DateAttribute {
 	 * Use fromValue()
 	 * JPA needs an protected/public non argument constructor
 	 */
+	@Deprecated
 	protected OrderDate() {
 		super();
 	}
@@ -27,6 +28,7 @@ public class OrderDate extends DateAttribute {
 	 * @deprecated
 	 * Use fromValue()-method
 	 */
+	@Deprecated
 	private OrderDate(Date aValue) {
 		super(aValue);
 	}

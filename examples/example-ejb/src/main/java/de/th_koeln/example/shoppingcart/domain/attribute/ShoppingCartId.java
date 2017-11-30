@@ -19,6 +19,7 @@ public class ShoppingCartId extends UuidAttribute {
 	 * Use fromValue()
 	 * JPA needs an protected/public non argument constructor
 	 */
+	@Deprecated
 	public ShoppingCartId() {
 		super();
 	}
@@ -27,6 +28,7 @@ public class ShoppingCartId extends UuidAttribute {
 	 * @deprecated
 	 * Use fromValue()-method
 	 */
+	@Deprecated
 	private ShoppingCartId(String aQuantity) {
 		super(aQuantity);
 	}

@@ -19,6 +19,7 @@ public class OrderId extends UuidAttribute {
 	 * Use fromValue()
 	 * JPA needs an protected/public non argument constructor
 	 */
+	@Deprecated
 	public OrderId() {
 		super();
 	}
@@ -27,6 +28,7 @@ public class OrderId extends UuidAttribute {
 	 * @deprecated
 	 * Use fromValue()-method
 	 */
+	@Deprecated
 	private OrderId(String aQuantity) {
 		super(aQuantity);
 	}

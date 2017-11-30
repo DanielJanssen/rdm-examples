@@ -17,6 +17,7 @@ public class ArticleNumber extends IntegerAttribute {
 	 * Use fromValue()
 	 * JPA needs an protected/public non argument constructor
 	 */
+	@Deprecated
 	protected ArticleNumber() {
 		super();
 	}
@@ -25,6 +26,7 @@ public class ArticleNumber extends IntegerAttribute {
 	 * @deprecated
 	 * Use fromValue()-method
 	 */
+	@Deprecated
 	private ArticleNumber(Integer aQuantity) {
 		super(aQuantity);
 	}

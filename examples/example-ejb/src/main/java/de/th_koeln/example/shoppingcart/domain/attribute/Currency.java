@@ -17,6 +17,7 @@ public class Currency extends StringAttribute {
 	 * Use fromValue()
 	 * JPA needs an protected/public non argument constructor
 	 */
+	@Deprecated
 	protected Currency() {
 		super();
 	}
@@ -25,6 +26,7 @@ public class Currency extends StringAttribute {
 	 * @deprecated
 	 * Use fromValue()-method
 	 */
+	@Deprecated
 	private Currency(String aValue) {
 		super(aValue);
 	}

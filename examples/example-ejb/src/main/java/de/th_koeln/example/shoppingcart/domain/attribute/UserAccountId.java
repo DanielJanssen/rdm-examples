@@ -19,6 +19,7 @@ public class UserAccountId extends UuidAttribute {
 	 * Use fromValue()
 	 * JPA needs an protected/public non argument constructor
 	 */
+	@Deprecated
 	public UserAccountId() {
 		super();
 	}
@@ -27,6 +28,7 @@ public class UserAccountId extends UuidAttribute {
 	 * @deprecated
 	 * Use fromValue()-method
 	 */
+	@Deprecated
 	private UserAccountId(String aQuantity) {
 		super(aQuantity);
 	}

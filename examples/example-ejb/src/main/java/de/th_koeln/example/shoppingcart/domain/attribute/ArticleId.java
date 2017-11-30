@@ -19,6 +19,7 @@ public class ArticleId extends UuidAttribute {
 	 * Use fromValue()
 	 * JPA needs an protected/public non argument constructor
 	 */
+	@Deprecated
 	public ArticleId() {
 		super();
 	}
@@ -27,6 +28,7 @@ public class ArticleId extends UuidAttribute {
 	 * @deprecated
 	 * Use fromValue()-method
 	 */
+	@Deprecated
 	private ArticleId(String aQuantity) {
 		super(aQuantity);
 	}

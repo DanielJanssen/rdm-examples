@@ -20,6 +20,7 @@ public class Amount extends BigDecimalAttribute {
 	 * Use fromValue()
 	 * JPA needs an protected/public non argument constructor
 	 */
+	@Deprecated
 	protected Amount() {
 		super();
 	}
@@ -28,6 +29,7 @@ public class Amount extends BigDecimalAttribute {
 	 * @deprecated
 	 * Use fromValue()-method
 	 */
+	@Deprecated
 	private Amount(BigDecimal aValue) {
 		super(aValue);
 	}

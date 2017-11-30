@@ -17,6 +17,7 @@ public class ArticleName extends StringAttribute {
 	 * Use fromValue()
 	 * JPA needs an protected/public non argument constructor
 	 */
+	@Deprecated
 	protected ArticleName() {
 		super();
 	}
@@ -25,6 +26,7 @@ public class ArticleName extends StringAttribute {
 	 * @deprecated
 	 * Use fromValue()-method
 	 */
+	@Deprecated
 	private ArticleName(String aValue) {
 		super(aValue);
 	}
