@@ -26,8 +26,8 @@ public class ArticleRepository {
 		return new JPAQuery(em).from(ARTICLE).list(ARTICLE);
 	}
 
-	public Article getArticle(ArticleId aArticleId) {
-		return em.find(Article.class, aArticleId);
+	public Article getArticle(ArticleId anArticleId) {
+		return em.find(Article.class, anArticleId);
 	}
 
 	public Article save(Article anArticle) {
