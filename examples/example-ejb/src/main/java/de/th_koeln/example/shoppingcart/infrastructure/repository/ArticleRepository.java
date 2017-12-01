@@ -30,8 +30,8 @@ public class ArticleRepository {
 		return em.find(Article.class, aArticleId);
 	}
 
-	public void save(Article anArticle) {
-		em.merge(anArticle);
+	public Article save(Article anArticle) {
+		return em.merge(anArticle);
 	}
 
 	public List<Article> getArticle(ArticleSearchVo aSearchVo) {
