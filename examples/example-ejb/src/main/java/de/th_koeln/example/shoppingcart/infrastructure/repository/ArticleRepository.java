@@ -34,6 +34,10 @@ public class ArticleRepository {
 		return em.merge(anArticle);
 	}
 
+	public void delete(Article anArticle) {
+		em.remove(anArticle);
+	}
+
 	public List<Article> getArticle(ArticleSearchVo aSearchVo) {
 		BooleanBuilder tempConditions = new BooleanBuilder();
 		addArticleName(aSearchVo.getArticleName(), tempConditions);
