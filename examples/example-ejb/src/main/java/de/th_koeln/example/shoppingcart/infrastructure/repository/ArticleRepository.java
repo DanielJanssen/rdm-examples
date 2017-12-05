@@ -39,14 +39,14 @@ public class ArticleRepository {
 	}
 
 	public List<Article> getArticle(ArticleSearchVo aSearchVo) {
-		BooleanBuilder tempConditions = new BooleanBuilder();
-		addArticleName(aSearchVo.getArticleName(), tempConditions);
-		return new JPAQuery(em).from(ARTICLE).where(tempConditions).list(ARTICLE);
+		BooleanBuilder conditions = new BooleanBuilder();
+		addArticleName(aSearchVo.getArticleName(), conditions);
+		return new JPAQuery(em).from(ARTICLE).where(conditions).list(ARTICLE);
 	}
 
-	private void addArticleName(ArticleName articleName, BooleanBuilder tempConditions) {
-		if (articleName != null && !articleName.isNullOrEmpty()) {
-			tempConditions.and(ARTICLE.name.eq(articleName));
+	private void addArticleName(ArticleName anArticleName, BooleanBuilder someConditions) {
+		if (anArticleName != null && !anArticleName.isNullOrEmpty()) {
+			someConditions.and(ARTICLE.name.eq(anArticleName));
 		}
 	}
 }
