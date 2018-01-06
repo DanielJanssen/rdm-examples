@@ -2,11 +2,11 @@ package de.th_koeln.example.quantity.attribute;
 
 import de.th_koeln.rdm.attribute.ShortAttribute;
 
-public class LengthInCentimeter extends ShortAttribute {
+public class PikeLengthInCentimeter extends ShortAttribute {
 
 	private static final long serialVersionUID = 1L;
 
-	private LengthInCentimeter(Short aQuantity) {
+	private PikeLengthInCentimeter(Short aQuantity) {
 		super(aQuantity);
 	}
 
@@ -21,8 +21,8 @@ public class LengthInCentimeter extends ShortAttribute {
 		return Boolean.TRUE;
 	}
 
-	public static LengthInCentimeter fromValue(Short aQuantity) {
-		return new LengthInCentimeter(aQuantity);
+	public static PikeLengthInCentimeter fromValue(Short aQuantity) {
+		return new PikeLengthInCentimeter(aQuantity);
 	}
 
 }
