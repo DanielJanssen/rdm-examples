@@ -6,8 +6,8 @@ public class PikeLengthInCentimeter extends ShortAttribute {
 
 	private static final long serialVersionUID = 1L;
 
-	private PikeLengthInCentimeter(Short aQuantity) {
-		super(aQuantity);
+	private PikeLengthInCentimeter(Short aLengtInCentimeter) {
+		super(aLengtInCentimeter);
 	}
 
 	@Override
@@ -21,8 +21,8 @@ public class PikeLengthInCentimeter extends ShortAttribute {
 		return Boolean.TRUE;
 	}
 
-	public static PikeLengthInCentimeter fromValue(Short aQuantity) {
-		return new PikeLengthInCentimeter(aQuantity);
+	public static PikeLengthInCentimeter fromValue(Short aLengtInCentimeter) {
+		return new PikeLengthInCentimeter(aLengtInCentimeter);
 	}
 
 }
