@@ -16,7 +16,6 @@ public class PikeLengthInCentimeterTest {
 		PikeLengthInCentimeter.fromValue((short) 161);
 	}
 
-	@Test
 	public void testFromValueIsZero() {
 		PikeLengthInCentimeter actual = PikeLengthInCentimeter.fromValue((short) 0);
 		assertEquals(Short.valueOf((short) 0), actual.getValue());
@@ -24,7 +23,9 @@ public class PikeLengthInCentimeterTest {
 
 	@Test
 	public void testFromValueIsGreaterThanZero() {
-		PikeLengthInCentimeter actual = PikeLengthInCentimeter.fromValue((short) 1);
-		assertEquals(Short.valueOf((short) 1), actual.getValue());
+
+		PikeLengthInCentimeter actual = PikeLengthInCentimeter.fromValue((short) 61);
+
+		assertEquals(Short.valueOf((short) 61), actual.getValue());
 	}
 }

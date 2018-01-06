@@ -134,7 +134,7 @@ public class ShoppingCart {
 	}
 
 	public List<ShoppingCartItem> getItems() {
-		return items;
+		return new ArrayList<>(items);
 	}
 
 	public OrderState getState() {
